@@ -29,9 +29,9 @@ jobs:
 
     - name: Build and push Docker image
       uses: docker/build-push-action@v4
-      working-directory: ./backend
       with:
-        context: .
+        context: ./backend/
+        file: ./backend/Dockerfile
         push: ${{ github.event_name != 'pull_request' }}
         tags: ${{ steps.meta.outputs.tags }}
         labels: ${{ steps.meta.outputs.labels }}
