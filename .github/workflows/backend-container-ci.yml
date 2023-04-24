@@ -25,7 +25,13 @@ jobs:
       with:
         images: jakobyte1024/conduit-backend
         tags: |
-          type=ref,event=branch
+          type=schedule
+            type=ref,event=branch
+            type=ref,event=pr
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
+            type=semver,pattern={{major}}
+            type=sha
 
     - name: Build and push Docker image
       uses: docker/build-push-action@v4
