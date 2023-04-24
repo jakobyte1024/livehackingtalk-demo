@@ -5,18 +5,6 @@ metadata:
   name: conduit
 
 ---
-apiVersion: v1
-kind: Secret
-metadata:
-  name: databasecredentials
-  namespace: conduit
-type: Opaque
-data:
-  username: YWRtaW5Vc2Vy #adminUser
-  password: cGFzc3dvcmR5 #passwordy
-  host: ZGF0YWJhc2UuY29uZHVpdA== #database.conduit
-
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -41,18 +29,15 @@ spec:
         - name: databaseUser
           valueFrom:
             secretKeyRef:
-              name: databasecredentials
+              name: conduit-db-app
               key: username
         - name: databasePassword
           valueFrom:
             secretKeyRef:
-              name: databasecredentials
+              name: conduit-db-app
               key: password
         - name: databaseHost
-          valueFrom:
-            secretKeyRef:
-              name: databasecredentials
-              key: host
+          value: conduit-db
         image: jakobyte1024/conduit-backend:main
       restartPolicy: Always
 ---
