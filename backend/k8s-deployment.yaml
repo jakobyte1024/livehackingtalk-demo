@@ -1,0 +1,71 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: conduit
+
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: databasecredentials
+  namespace: conduit
+type: Opaque
+data:
+  username: YWRtaW5Vc2Vy #adminUser
+  password: cGFzc3dvcmR5 #passwordy
+  host: ZGF0YWJhc2UuY29uZHVpdA== #database.conduit
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: conduit-backend
+  namespace: conduit
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: conduit-backend
+  template:
+    metadata:
+      name: conduit-backend
+      labels:
+        app: conduit-backend
+    spec:
+      containers:
+      - name: conduit-backend
+        env:
+        - name: SPRING_PROFILES_ACTIVE
+          value: dev
+        - name: databaseUser
+          valueFrom:
+            secretKeyRef:
+              name: databasecredentials
+              key: username
+        - name: databasePassword
+          valueFrom:
+            secretKeyRef:
+              name: databasecredentials
+              key: password
+        - name: databaseHost
+          valueFrom:
+            secretKeyRef:
+              name: databasecredentials
+              key: host
+        image: jakobyte1024/conduit-backend:main
+      restartPolicy: Always
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: conduit-backend
+  namespace: conduit
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 8080
+  selector:
+    app: conduit-backend
+---
