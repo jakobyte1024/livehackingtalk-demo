@@ -21,7 +21,7 @@ public class UserService {
     public User signUp(SignUpUserRequest request) {
         this.validateUsernameAndEmail(request);
         User newUser = request.toUser();
-        newUser.password(request.password() + "-encoded");
+        newUser.password(request.password());
         return userRepository.save(newUser);
     }
 
