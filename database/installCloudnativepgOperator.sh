@@ -9,17 +9,6 @@ helm upgrade --install \
   prometheus-community \
   prometheus-community/kube-prometheus-stack
 
-# kubectl apply -f |
-#     apiVersion: v1
-#     kind: Secret
-#     metadata:
-#         name: databasecredentials
-#         namespace: conduit
-#     type: Opaque
-#     data:
-#         username: YWRtaW5Vc2Vy #adminUser
-#         password: cGFzc3dvcmR5 #passwordy
-
 cat <<EOF | kubectl apply -f -
     apiVersion: postgresql.cnpg.io/v1
     kind: Cluster
