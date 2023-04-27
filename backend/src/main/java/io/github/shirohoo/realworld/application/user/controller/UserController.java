@@ -11,6 +11,7 @@ import io.github.shirohoo.realworld.domain.user.User;
 import io.github.shirohoo.realworld.domain.user.UserVO;
 
 import java.util.Map;
+import java.util.UUID;
 
 import jakarta.servlet.http.HttpServletRequest;
 
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.View;
@@ -50,6 +52,12 @@ public class UserController {
     @GetMapping("/api/user")
     public UserResponse getCurrentUser(User me) {
         UserVO userVO = new UserVO(me);
+        return new UserResponse(userVO);
+    }
+
+    @GetMapping("/api/user/{userId}")
+    public UserResponse getUser(@PathVariable String userId) {
+        UserVO userVO = userService.findUser(UUID.fromString(userId));
         return new UserResponse(userVO);
     }
 

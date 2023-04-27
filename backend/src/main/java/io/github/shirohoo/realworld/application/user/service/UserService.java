@@ -7,10 +7,14 @@ import io.github.shirohoo.realworld.domain.user.User;
 import io.github.shirohoo.realworld.domain.user.UserRepository;
 import io.github.shirohoo.realworld.domain.user.UserVO;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.server.ResponseStatusException;
 
 import lombok.RequiredArgsConstructor;
+
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -46,7 +50,19 @@ public class UserService {
                     String token = "superToken";
                     return new UserVO(user.token(token));
                 })
-                .orElseThrow(() -> new IllegalArgumentException("Invalid email or password."));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Invalid user or password"));
+    }
+
+    @Transactional(readOnly = true)
+    public UserVO findUser(UUID userId) {
+
+        return userRepository
+                .findById(userId)
+                .filter(user -> userId.equals(userId))
+                .map(user -> {
+                    return new UserVO(user);
+                })
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find resource"));
     }
 
     @Transactional
