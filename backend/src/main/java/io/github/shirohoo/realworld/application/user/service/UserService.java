@@ -7,14 +7,14 @@ import io.github.shirohoo.realworld.domain.user.User;
 import io.github.shirohoo.realworld.domain.user.UserRepository;
 import io.github.shirohoo.realworld.domain.user.UserVO;
 
+import java.util.UUID;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
 import lombok.RequiredArgsConstructor;
-
-import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor

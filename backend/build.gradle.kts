@@ -30,7 +30,6 @@ dependencies {
     implementation("org.postgresql:postgresql")
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
 
-
     runtimeOnly("com.h2database:h2")
 }
 
