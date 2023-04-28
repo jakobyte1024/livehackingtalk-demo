@@ -26,18 +26,24 @@ spec:
         env:
         - name: SPRING_PROFILES_ACTIVE
           value: dev
-        - name: databaseUser
+        - name: DATABASE_USER
           valueFrom:
             secretKeyRef:
               name: conduit-db-app
               key: username
-        - name: databasePassword
+        - name: DATABASE_PASSWORD
           valueFrom:
             secretKeyRef:
               name: conduit-db-app
               key: password
-        - name: databaseHost
-          value: conduit-db
+        - name: DATABASE_HOSTNAME
+          value: conduit-db-rw
+        - name: DATABASE_PORT
+          value: 5432
+        - name: DATABASE_NAME
+          value: app
+        - name: APPLICATION_PROFILE
+          value: prod
         image: jakobyte1024/conduit-backend:main
       restartPolicy: Always
 ---
