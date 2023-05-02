@@ -2,6 +2,8 @@ name: Backend Container Image CI
 
 on:
   push:
+    paths:
+      - backend/**
     branches: [ "main" ]
 
 jobs:
