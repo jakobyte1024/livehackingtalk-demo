@@ -36,7 +36,7 @@ spec:
           value: "5432"
         - name: DATABASE_NAME
           value: app
-        image: jakobyte1024/conduit-backend:sha-983d446
+        image: jakobyte1024/conduit-backend:sha-8094fe2
       restartPolicy: Always
 ---
 
