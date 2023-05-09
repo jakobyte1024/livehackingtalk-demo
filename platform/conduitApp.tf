@@ -125,4 +125,4 @@ resource "google_storage_bucket_iam_member" "bindingPsqlBucket" {
   role = "roles/storage.admin"
   member = "serviceAccount:${google_service_account.conduit.email}"
 }
- 
+  
