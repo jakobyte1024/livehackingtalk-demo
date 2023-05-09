@@ -26,7 +26,7 @@ resource "kubernetes_manifest" "psqlInitCredentials" {
     }
 
     "data" = {
-        "username" = "Y29uZHVpdERhdGFiYXNlUHJvZFVzZXI="
+        "username" = "Y29uZHVpdA=="
         "password" = "Y29uZHVpN0RhN2FiYXMzUHIwZFVTM3JQYVNTdzByZA=="
     }
   }
@@ -73,8 +73,8 @@ resource "kubernetes_manifest" "psqlCluster" {
 
       "bootstrap" = {
         "initdb" = {
-            "database" = "conduit-app"
-            "owner" = "conduit-app"
+            "database" = "conduit"
+            "owner" = "conduit"
             "secret" = {
                 "name" = "database-initcreds"
             }
