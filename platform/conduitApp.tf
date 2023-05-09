@@ -26,7 +26,7 @@ resource "kubernetes_manifest" "psqlInitCredentials" {
     }
 
     "data" = {
-        "username" = "Y29uZHVpdC1hcHAK"
+        "username" = "Y29uZHVpdERiVXNlcgo="
         "password" = "ZGF0YWJhc2UtcGFTU3cwcmQK"
     }
   }
@@ -43,7 +43,7 @@ resource "kubernetes_manifest" "psqlInitSuperuserCredentials" {
     }
 
     "data" = {
-        "username" = "ZGF0YWJhc2Utcm9vdAo="
+        "username" = "cm9vdERiVXNlcgo="
         "password" = "ZGF0YWJhc2Utcm9vdC1wYVNTdzByZAo="
     }
   }
