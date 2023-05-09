@@ -26,8 +26,8 @@ resource "kubernetes_manifest" "psqlInitCredentials" {
     }
 
     "data" = {
-        "username" = "Y29uZHVpdERiVXNlcgo="
-        "password" = "ZGF0YWJhc2UtcGFTU3cwcmQK"
+        "username" = "Y29uZHVpdERiVXNlcg=="
+        "password" = "29uZHVpdERhdGFiYXNlUGFzc3dvcmQ="
     }
   }
 }
