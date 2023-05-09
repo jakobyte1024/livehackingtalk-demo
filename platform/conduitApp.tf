@@ -79,7 +79,7 @@ resource "kubernetes_manifest" "psqlClusterBackup" {
 
   depends_on = [
     kubernetes_manifest.psqlCluster,
-    google_storage_bucket_iam_binding.bindingPsqlBucket
+    google_storage_bucket_iam_member.bindingPsqlBucket
   ]
 }
 
@@ -99,7 +99,7 @@ resource "google_storage_bucket" "databaseBackupBucket" {
 #   ]
 # }
 
-resource "google_storage_bucket_iam_member" "bindingPsqlBucketGet" {
+resource "google_storage_bucket_iam_member" "bindingPsqlBucket" {
   bucket = google_storage_bucket.databaseBackupBucket.name
   role = "roles/storage.admin"
   member = "serviceAccount:${google_service_account.conduit.email}"
