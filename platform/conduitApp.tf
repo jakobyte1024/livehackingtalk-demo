@@ -44,7 +44,7 @@ resource "kubernetes_manifest" "psqlCluster" {
 
     "spec" = {
       "instances" = "1"
-      "primaryUpdateStrategy" = "supervised"
+      "primaryUpdateStrategy" = "unsupervised"
       
       "storage" = {
         "size" = "4Gi"
