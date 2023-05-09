@@ -91,14 +91,6 @@ resource "google_storage_bucket" "databaseBackupBucket" {
   uniform_bucket_level_access = true
 }
 
-# resource "google_storage_bucket_iam_binding" "bindingPsqlBucket" {
-#   bucket = google_storage_bucket.databaseBackupBucket.name
-#   role = "roles/storage.objectCreator"
-#   members = [
-#     "serviceAccount:${google_service_account.conduit.email}"
-#   ]
-# }
-
 resource "google_storage_bucket_iam_member" "bindingPsqlBucket" {
   bucket = google_storage_bucket.databaseBackupBucket.name
   role = "roles/storage.admin"
