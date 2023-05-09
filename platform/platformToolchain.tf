@@ -30,6 +30,8 @@ resource "helm_release" "jenkins" {
   ]
 
   values = [<<EOF
+agent:
+  enabled: false
 controller:
   tag: 2.299
   serviceType: LoadBalancer
