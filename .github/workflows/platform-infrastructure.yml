@@ -23,7 +23,7 @@ jobs:
         shell: bash
         env:
           TF_VAR_environment: "test"
-          GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GCPCRED }}
+          GOOGLE_CREDENTIALS: ${{ secrets.GCPCRED }}
       
       - name: Terraform apply
         run: |
@@ -31,4 +31,4 @@ jobs:
         shell: bash
         env:
           TF_VAR_environment: "test"
-          GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GCPCRED }}
+          GOOGLE_CREDENTIALS: ${{ secrets.GCPCRED }}
