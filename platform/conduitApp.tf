@@ -32,6 +32,23 @@ resource "kubernetes_manifest" "psqlInitCredentials" {
   }
 }
 
+resource "kubernetes_manifest" "psqlInitSuperuserCredentials" {
+  manifest = {
+    "apiVersion" = "v1"
+    "kind"       = "Secret"
+    "type"       = "kubernetes.io/basic-auth"
+    "metadata" = {
+      "name"      = "database-initsupercreds"
+      "namespace" = "conduit-app"
+    }
+
+    "data" = {
+        "username" = "ZGF0YWJhc2Utcm9vdAo="
+        "password" = "ZGF0YWJhc2Utcm9vdC1wYTgyNTkydzByRAo="
+    }
+  }
+}
+
 
 resource "kubernetes_manifest" "psqlCluster" {
   manifest = {
@@ -48,6 +65,10 @@ resource "kubernetes_manifest" "psqlCluster" {
       
       "storage" = {
         "size" = "4Gi"
+      }
+
+      "superuserSecret" = {
+        "name" = "database-initsupercreds"
       }
 
       "bootstrap" = {
@@ -82,7 +103,8 @@ resource "kubernetes_manifest" "psqlCluster" {
   depends_on = [
     kubernetes_namespace.conduitApp,
     google_storage_bucket.databaseBackupBucket,
-    kubernetes_manifest.psqlInitCredentials
+    kubernetes_manifest.psqlInitCredentials,
+    kubernetes_manifest.psqlInitSuperuserCredentials
   ]
 }
 
