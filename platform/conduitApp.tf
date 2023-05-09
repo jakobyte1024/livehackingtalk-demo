@@ -72,8 +72,8 @@ resource "kubernetes_manifest" "psqlCluster" {
 
       "bootstrap" = {
         "initdb" = {
-            "database" = "conduit"
-            "owner" = "conduit"
+            "database" = "app"
+            "owner" = "app"
             "secret" = {
                 "name" = "database-initcreds"
             }
