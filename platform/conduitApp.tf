@@ -101,6 +101,6 @@ resource "google_storage_bucket_iam_binding" "bindingPsqlBucket" {
 
 resource "google_storage_bucket_iam_member" "bindingPsqlBucketGet" {
   bucket = google_storage_bucket.databaseBackupBucket.name
-  role = "roles/storage.objectCreator"
+  role = "roles/storage.buckets.get"
   member = "serviceAccount:${google_service_account.conduit.email}"
 }
