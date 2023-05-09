@@ -15,6 +15,24 @@ resource "helm_release" "conduitDb" {
   ]
 }
 
+resource "kubernetes_manifest" "psqlInitCredentials" {
+  manifest = {
+    "apiVersion" = "v1"
+    "kind"       = "Secret"
+    "type"       = "kubernetes.io/basic-auth"
+    "metadata" = {
+      "name"      = "database-initcreds"
+      "namespace" = "conduit-app"
+    }
+
+    "data" = {
+        "username" = "Y29uZHVpdC1hcHAK"
+        "password" = "Y29uZHVpdC1kYi1wYTQ3Mzd3MHJkCg=="
+    }
+  }
+}
+
+
 resource "kubernetes_manifest" "psqlCluster" {
   manifest = {
     "apiVersion" = "postgresql.cnpg.io/v1"
@@ -25,18 +43,28 @@ resource "kubernetes_manifest" "psqlCluster" {
     }
 
     "spec" = {
-      "instances" = "2"
+      "instances" = "1"
       "primaryUpdateStrategy" = "supervised"
       
       "storage" = {
         "size" = "4Gi"
       }
 
-       "backup" = {
-        "barmanObjectStore" = {
-            "googleCredentials" = {
-                "gkeEnvironment" = true
+      "bootstrap" = {
+        "initdb" = {
+            "database" = "conduit-app"
+            "owner" = "conduit-app"
+            "secret" = {
+                "name" = "database-initcreds"
             }
+        }
+      }
+
+       "backup" = {
+            "barmanObjectStore" = {
+                "googleCredentials" = {
+                    "gkeEnvironment" = true
+                }
             "destinationPath" = google_storage_bucket.databaseBackupBucket.url
            } 
         }
@@ -53,7 +81,8 @@ resource "kubernetes_manifest" "psqlCluster" {
 
   depends_on = [
     kubernetes_namespace.conduitApp,
-    google_storage_bucket.databaseBackupBucket
+    google_storage_bucket.databaseBackupBucket,
+    kubernetes_manifest.psqlInitCredentials
   ]
 }
 
