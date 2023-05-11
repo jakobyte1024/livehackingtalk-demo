@@ -32,23 +32,6 @@ resource "kubernetes_manifest" "psqlInitCredentials" {
   }
 }
 
-resource "kubernetes_manifest" "psqlInitSuperuserCredentials" {
-  manifest = {
-    "apiVersion" = "v1"
-    "kind"       = "Secret"
-    "type"       = "kubernetes.io/basic-auth"
-    "metadata" = {
-      "name"      = "database-initsupercreds"
-      "namespace" = "conduit-app"
-    }
-
-    "data" = {
-        "password" = "ZGF0YWJhc2Utcm9vdC1wYVNTdzByZAo="
-    }
-  }
-}
-
-
 resource "kubernetes_manifest" "psqlCluster" {
   manifest = {
     "apiVersion" = "postgresql.cnpg.io/v1"
