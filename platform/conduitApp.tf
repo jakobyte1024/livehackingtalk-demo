@@ -81,8 +81,7 @@ resource "kubernetes_manifest" "psqlCluster" {
   depends_on = [
     kubernetes_namespace.conduitApp,
     google_storage_bucket.databaseBackupBucket,
-    kubernetes_manifest.psqlInitCredentials,
-    kubernetes_manifest.psqlInitSuperuserCredentials
+    kubernetes_manifest.psqlInitCredentials
   ]
 }
 
