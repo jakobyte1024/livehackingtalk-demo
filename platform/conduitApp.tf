@@ -66,10 +66,6 @@ resource "kubernetes_manifest" "psqlCluster" {
         "size" = "4Gi"
       }
 
-      "superuserSecret" = {
-        "name" = "database-initsupercreds"
-      }
-
       "bootstrap" = {
         "initdb" = {
             "database" = "app"
