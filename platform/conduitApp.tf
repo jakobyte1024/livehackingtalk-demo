@@ -126,7 +126,7 @@ resource "google_storage_bucket_iam_member" "bindingPsqlBucket" {
 }
 
 resource "google_compute_address" "conduitBackendIp" {
-  name          = "conduitBackendip"
+  name          = "conduitbackendip"
   region        = "europe-west3"
   address_type  = "EXTERNAL"
 }
