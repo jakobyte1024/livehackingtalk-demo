@@ -168,6 +168,7 @@ resource "kubernetes_deployment" "conduit_backend" {
         container {
           name  = "conduit-backend"
           image = "jakobyte1024/conduit-backend:main"
+          image_pull_policy = "always"
 
           env {
             name  = "SPRING_PROFILES_ACTIVE"
