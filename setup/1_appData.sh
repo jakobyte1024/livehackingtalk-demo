@@ -1,4 +1,4 @@
-APIURL=${APIURL:-http://127.0.0.1:8080/api}
+APIURL=${APIURL:-http://conduit.test.nevervictimconsult.xyz:8080/api}
 
 npx newman run Conduit-setup.postman_collection.json \
   --delay-request 100 \
