@@ -167,7 +167,7 @@ resource "kubernetes_deployment" "conduit_backend" {
       spec {
         container {
           name  = "conduit-backend"
-          image = "jakobyte1024/conduit-backend:main"
+          image = "jakobyte1024/conduit-backend:sha-11632c4"
           image_pull_policy = "Always"
 
           env {
