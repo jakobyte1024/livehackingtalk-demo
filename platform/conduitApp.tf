@@ -124,4 +124,108 @@ resource "google_storage_bucket_iam_member" "bindingPsqlBucket" {
   role = "roles/storage.admin"
   member = "serviceAccount:${google_service_account.conduit.email}"
 }
-   
+
+resource "kubernetes_deployment" "conduit_backend" {
+  metadata {
+    name      = "conduit-backend"
+    namespace = "conduit-app"
+  }
+
+  spec {
+    replicas = 3
+
+    selector {
+      match_labels = {
+        app = "conduit-backend"
+      }
+    }
+
+    template {
+      metadata {
+        name = "conduit-backend"
+
+        labels = {
+          app = "conduit-backend"
+        }
+      }
+
+      spec {
+        container {
+          name  = "conduit-backend"
+          image = "jakobyte1024/conduit-backend:sha-8094fe2"
+
+          env {
+            name  = "SPRING_PROFILES_ACTIVE"
+            value = "prod"
+          }
+
+          env {
+            name = "DATABASE_USER"
+
+            value_from {
+              secret_key_ref {
+                name = "database-initcreds"
+                key  = "username"
+              }
+            }
+          }
+
+          env {
+            name = "DATABASE_PASSWORD"
+
+            value_from {
+              secret_key_ref {
+                name = "database-initcreds"
+                key  = "password"
+              }
+            }
+          }
+
+          env {
+            name  = "DATABASE_HOSTNAME"
+            value = "database-rw"
+          }
+
+          env {
+            name  = "DATABASE_PORT"
+            value = "5432"
+          }
+
+          env {
+            name  = "DATABASE_NAME"
+            value = "app"
+          }
+        }
+
+        restart_policy = "Always"
+      }
+    }
+  }
+
+  depends_on = [
+    kubernetes_manifest.psqlCluster
+  ]
+}
+
+resource "kubernetes_service" "conduit_backend" {
+  metadata {
+    name      = "conduit-backend"
+    namespace = "conduit-app"
+  }
+
+  spec {
+    port {
+      port = 8080
+    }
+
+    selector = {
+      app = "conduit-backend"
+    }
+
+    type = "LoadBalancer"
+  }
+
+  depends_on = [
+    kubernetes_deployment.conduit_backend
+  ]
+}
