@@ -125,6 +125,21 @@ resource "google_storage_bucket_iam_member" "bindingPsqlBucket" {
   member = "serviceAccount:${google_service_account.conduit.email}"
 }
 
+resource "google_compute_address" "conduitBackendIp" {
+  name          = "conduitBackendip"
+  region        = "europe-west3"
+  address_type  = "EXTERNAL"
+}
+
+resource "google_dns_record_set" "conduitBackend" {
+  name         = "conduit.${var.environment}.${data.google_dns_managed_zone.env_dns_zone.dns_name}"
+  managed_zone = data.google_dns_managed_zone.env_dns_zone.name
+  type         = "A"
+  ttl          = 10
+
+  rrdatas = [google_compute_address.conduitBackendIp.address]
+}
+
 resource "kubernetes_deployment" "conduit_backend" {
   metadata {
     name      = "conduit-backend"
@@ -217,6 +232,7 @@ resource "kubernetes_service" "conduit_backend" {
     port {
       port = 8080
     }
+    load_balancer_ip = google_compute_address.conduitBackendIp.address
 
     selector = {
       app = "conduit-backend"
