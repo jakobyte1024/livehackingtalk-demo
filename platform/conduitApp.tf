@@ -167,7 +167,7 @@ resource "kubernetes_deployment" "conduit_backend" {
       spec {
         container {
           name  = "conduit-backend"
-          image = "jakobyte1024/conduit-backend:sha-8094fe2"
+          image = "jakobyte1024/conduit-backend:main"
 
           env {
             name  = "SPRING_PROFILES_ACTIVE"
