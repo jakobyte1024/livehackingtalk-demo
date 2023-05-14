@@ -33,7 +33,7 @@ resource "helm_release" "jenkins" {
 agent:
   enabled: false
 controller:
-  tag: 2.137
+  tag: 2.31
   serviceType: LoadBalancer
   installLatestPlugins: false
   overwritePluginsFromImage: true

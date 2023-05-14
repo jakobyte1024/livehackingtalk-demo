@@ -7,7 +7,9 @@ User jenkins
 
 ENV CURL_OPTIONS --insecure
 COPY plugins.txt /usr/share/jenkins/ref/plugins.txt
-RUN  /usr/local/bin/plugins.sh /usr/share/jenkins/ref/plugins.txt
+COPY plugins.sh /usr/local/bin/plugins.sh
+COPY install-plugins.sh /usr/local/bin/install-plugins.sh
+RUN  /usr/local/bin/install-plugins.sh < /usr/share/jenkins/ref/plugins.txt
 
 RUN echo 2.137 > /usr/share/jenkins/ref/jenkins.install.UpgradeWizard.state
 RUN echo 2.137 > /usr/share/jenkins/ref/jenkins.install.InstallUtil.lastExecVersion
