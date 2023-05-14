@@ -57,9 +57,27 @@ controller:
         allowsSignup: false
         enableCaptcha: false
         users:
-        - id: "conduit-admin"
-          name: "Jenkins Admin"
-          password: "conduit-admin-password"
+          - id: "conduit-admin"
+            name: "Jenkins Admin"
+            password: "K0nDu17-4dm1n-p422W0rD"
+          - id: "KMeyer"
+            name: "Kay Meyer"
+            password: "a842000zhd"
+          - id: "RobertB"
+            name: "Robert Bartsch"
+            password: "55403818 b--"
+          - id: "RicardoPope"
+            name: "Ricardo Pope"
+            password: "g3mm@;"
+          - id: "SueLeach"
+            name: "Sue Leach"
+            password: "ejngyhga007-"
+          - id: "Lukasz_Newman"
+            name: "Lukasz Newman"
+            password: "cheater"
+          - id: "Jeffrey_van_d_Linden"
+            name: "Jeffrey van der Linden"
+            password: "xCvBnM,"
     authorizationStrategy: |-
       loggedInUsersCanDoAnything:
         allowAnonymousRead: false
