@@ -33,7 +33,7 @@ resource "helm_release" "jenkins" {
 agent:
   enabled: false
 controller:
-  tag: 2.137
+  tag: 2.300
   serviceType: LoadBalancer
   installLatestPlugins: false
   overwritePluginsFromImage: true
@@ -45,25 +45,24 @@ controller:
       value: --insecure
   loadBalancerIP: ${google_compute_address.jenkinsIp.address}
   installPlugins: 
-#    - git:4.0.0
-#    - git-client:3.11.2
-#    - configuration-as-code:1.54
-#    - kubernetes:1.30.5
-#    - workflow-cps:2.61
-#    - workflow-aggregator:2.7
-#    - extended-security-settings:1.3
-  # JCasC:
-  #   securityRealm: |-
-  #     local:
-  #       allowsSignup: false
-  #       enableCaptcha: false
-  #       users:
-  #       - id: "conduit-admin"
-  #         name: "Jenkins Admin"
-  #         password: "conduit-admin-password"
-  #   authorizationStrategy: |-
-  #     loggedInUsersCanDoAnything:
-  #       allowAnonymousRead: false
+    - git:4.0.0
+    - git-client:3.11.2
+    - configuration-as-code:1.54
+    - kubernetes:1.30.5
+    - workflow-cps:2.94
+    - workflow-aggregator:2.7
+  JCasC:
+    securityRealm: |-
+      local:
+        allowsSignup: false
+        enableCaptcha: false
+        users:
+        - id: "conduit-admin"
+          name: "Jenkins Admin"
+          password: "conduit-admin-password"
+    authorizationStrategy: |-
+      loggedInUsersCanDoAnything:
+        allowAnonymousRead: false
 EOF
   ]
 }
