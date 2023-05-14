@@ -51,6 +51,7 @@ controller:
   # - workflow-cps-global-lib:2.14
   # - configuration-as-code:1.54
   # - kubernetes:1.30.5
+    - workflow-cps:2.61
   JCasC:
     securityRealm: |-
       local:
