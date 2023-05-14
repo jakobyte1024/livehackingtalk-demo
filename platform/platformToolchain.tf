@@ -49,7 +49,7 @@ controller:
 #    - git-client:3.11.2
 #    - configuration-as-code:1.54
 #    - kubernetes:1.30.5
-    - workflow-cps:2.61
+#    - workflow-cps:2.61
 #    - workflow-aggregator:2.7
 #    - extended-security-settings:1.3
   # JCasC:
