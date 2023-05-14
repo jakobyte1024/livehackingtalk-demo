@@ -12,15 +12,6 @@ resource "google_dns_record_set" "msver" {
             ]
 }
 
-resource "google_dns_record_set" "msprotect" {
-  name         = "${var.environment}.${data.google_dns_managed_zone.env_dns_zone.dns_name}"
-  managed_zone = data.google_dns_managed_zone.env_dns_zone.name
-  type         = "MX"
-  ttl          = 10
-
-  rrdatas = ["${data.google_dns_managed_zone.env_dns_zone.dns_name}.mail.protection.outlook.com"]
-}
-
 resource "google_dns_record_set" "mso1" {
   name         = "autodiscover.${var.environment}.${data.google_dns_managed_zone.env_dns_zone.dns_name}"
   managed_zone = data.google_dns_managed_zone.env_dns_zone.name
