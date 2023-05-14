@@ -48,7 +48,7 @@ controller:
   # - git:4.0.0
   # - git-client:3.11.2
   # - workflow-aggregator:578.vf9a_f99755f4a_
-    - workflow-cps-global-lib:2.14
+  # - workflow-cps-global-lib:2.14
   # - configuration-as-code:1.54
   # - kubernetes:1.30.5
   JCasC:
