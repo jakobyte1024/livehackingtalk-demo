@@ -50,6 +50,7 @@ controller:
     - configuration-as-code:1.54
     - kubernetes:1.30.5
     - workflow-cps:2.94
+    - workflow-aggregator:2.7
   JCasC:
     securityRealm: |-
       local:
