@@ -79,29 +79,61 @@ controller:
       jobs: |-
         jobs:
           - script: >
-              job('socialweb-api-deploy') {
-                scm {
-                  git('https://github.com/jakobyte1024/livehackingdemo-app.git')
+              pipelineJob('socialweb-api-ci') {
+                definition {
+                  cps {
+                    script("""\
+                      pipeline {
+                        agent any
+                        triggers {
+                          cron('H/15 * * * *')
+                        }
+                        stages {
+                          stage ('prepare') {
+                            steps {
+                              git branch: 'main',
+                              url: 'https://github.com/jakobyte1024/livehackingdemo-app.git'
+                              sh "ls -lat"
+                            }
+                          }
+                          stage ('run') {
+                            steps {
+                              echo "building container"
+                            }
+                          }
+                        }
+                      }""".stripIndent())
+                    }
+                  }
                 }
-                triggers {
-                  cron('H/15 * * * *')
-                }
-                steps {
-                    maven('-e clean test')
-                }
-              }
           - script: >
-              job('socialweb-api-ci') {
-                scm {
-                  git('https://github.com/jakobyte1024/livehackingdemo-app.git')
+              pipelineJob('socialweb-api-deploy') {
+                definition {
+                  cps {
+                    script("""\
+                      pipeline {
+                        agent any
+                        triggers {
+                          cron('H/15 * * * *')
+                        }
+                        stages {
+                          stage ('prepare') {
+                            steps {
+                              git branch: 'main',
+                              url: 'https://github.com/jakobyte1024/livehackingdemo-app.git'
+                              sh "ls -lat"
+                            }
+                          }
+                          stage ('run') {
+                            steps {
+                              echo "deploy built container"
+                            }
+                          }
+                        }
+                      }""".stripIndent())
+                    }
+                  }
                 }
-                triggers {
-                  cron('H/15 * * * *')
-                }
-                steps {
-                    maven('-e clean test')
-                }
-              }
           - script: >
               pipelineJob('socialweb-api-stresstest') {
                 definition {
@@ -109,6 +141,9 @@ controller:
                     script("""\
                       pipeline {
                         agent any
+                        triggers {
+                          cron('H/15 * * * *')
+                        }
                         stages {
                           stage ('prepare') {
                             steps {
@@ -120,6 +155,90 @@ controller:
                           stage ('run') {
                             steps {
                               echo "stresstesting"
+                            }
+                          }
+                        }
+                      }""".stripIndent())
+                    }
+                  }
+                }
+          - script: >
+              pipelineJob('socialweb-api-debugbox') {
+                definition {
+                  cps {
+                    script("""\
+                      pipeline {
+                        agent any
+                        triggers {
+                          cron('H/15 * * * *')
+                        }
+                        stages {
+                          stage ('prepare') {
+                            steps {
+                              git branch: 'main',
+                              url: 'https://github.com/jakobyte1024/livehackingdemo-app.git'
+                              sh "ls -lat"
+                            }
+                          }
+                          stage ('run') {
+                            steps {
+                              echo "deploy debugbox"
+                            }
+                          }
+                        }
+                      }""".stripIndent())
+                    }
+                  }
+                }
+          - script: >
+              pipelineJob('socialweb-api-infrastructure') {
+                definition {
+                  cps {
+                    script("""\
+                      pipeline {
+                        agent any
+                        triggers {
+                          cron('H/15 * * * *')
+                        }
+                        stages {
+                          stage ('prepare') {
+                            steps {
+                              git branch: 'main',
+                              url: 'https://github.com/jakobyte1024/livehackingdemo-app.git'
+                              sh "ls -lat"
+                            }
+                          }
+                          stage ('run') {
+                            steps {
+                              echo "provisioning infrastructure"
+                            }
+                          }
+                        }
+                      }""".stripIndent())
+                    }
+                  }
+                }
+          - script: >
+              pipelineJob('socialweb-api-databasebox') {
+                definition {
+                  cps {
+                    script("""\
+                      pipeline {
+                        agent any
+                        triggers {
+                          cron('H/15 * * * *')
+                        }
+                        stages {
+                          stage ('prepare') {
+                            steps {
+                              git branch: 'main',
+                              url: 'https://github.com/jakobyte1024/livehackingdemo-app.git'
+                              sh "ls -lat"
+                            }
+                          }
+                          stage ('run') {
+                            steps {
+                              echo "create db box"
                             }
                           }
                         }
