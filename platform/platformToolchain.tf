@@ -28,6 +28,12 @@ resource "google_service_account_key" "jenkins" {
   service_account_id = google_service_account.jenkins.name
 }
 
+resource "google_project_iam_member" "jenkinsMember" {
+  project = "thorsten-jakoby-tj-projekt"
+  role    = "roles/editor"
+  member  = "serviceAccount:${google_service_account.jenkins.email}"
+}
+
 resource "helm_release" "jenkins" {
   name       = "conduit-jenkins"
   repository = "https://charts.jenkins.io"
