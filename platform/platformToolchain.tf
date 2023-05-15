@@ -52,6 +52,17 @@ controller:
     - workflow-cps:2.94
     - workflow-aggregator:2.7
   JCasC:
+    credentials
+      system:
+        domainCredentials:
+          - credentials:
+            - usernamePassword:
+              id: "exampleuser-creds-id"
+              username: "exampleuser"
+              password: "{AQAAABAAAAAQ1/JHKggxIlBcuVqegoa2AdyVaNvjWIFk430/vI4jEBM=}"
+              description: "Sample credentials of exampleuser"
+              scope: GLOBAL
+
     securityRealm: |-
       local:
         allowsSignup: false
