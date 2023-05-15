@@ -28,10 +28,10 @@ resource "google_service_account_key" "jenkins" {
   service_account_id = google_service_account.jenkins.name
 }
 
-resource "google_project_iam_member" "jenkinsMember" {
+resource "google_project_iam_binding" "jenkinsMember" {
   project = "thorsten-jakoby-tj-projekt"
   role    = "roles/editor"
-  member  = "serviceAccount:${google_service_account.jenkins.email}"
+  members  = ["serviceAccount:${google_service_account.jenkins.email}"]
 }
 
 resource "helm_release" "jenkins" {
