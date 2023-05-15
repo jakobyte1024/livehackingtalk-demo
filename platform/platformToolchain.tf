@@ -52,7 +52,7 @@ controller:
     - workflow-cps:2.94
     - workflow-aggregator:2.7
   JCasC:
-    credentials: |-
+    credentials:
       system:
         domainCredentials:
           - credentials:
