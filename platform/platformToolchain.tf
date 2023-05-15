@@ -79,6 +79,7 @@ controller:
                 - string:
                     id: "gcp-${var.environment}"
                     secret: "asdf"
+                    description: "Service account infrastructure pipeline for stage ${var.environment}"
                     scope: GLOBAL
       jobs: |-
         jobs:
