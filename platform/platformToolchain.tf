@@ -31,7 +31,7 @@ resource "helm_release" "jenkins" {
 
   values = [<<EOF
 agent:
-  enabled: false
+  enabled: true
 rbac:
   create: true
 controller:
