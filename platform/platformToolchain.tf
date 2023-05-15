@@ -57,11 +57,11 @@ controller:
         domainCredentials:
           - credentials:
             - usernamePassword:
-              id: "exampleuser-creds-id"
-              username: "exampleuser"
-              password: "{AQAAABAAAAAQ1/JHKggxIlBcuVqegoa2AdyVaNvjWIFk430/vI4jEBM=}"
-              description: "Sample credentials of exampleuser"
-              scope: GLOBAL
+                id: "exampleuser-creds-id"
+                username: "exampleuser"
+                password: "{AQAAABAAAAAQ1/JHKggxIlBcuVqegoa2AdyVaNvjWIFk430/vI4jEBM=}"
+                description: "Sample credentials of exampleuser"
+                scope: GLOBAL
     securityRealm: |-
       local:
         allowsSignup: false
