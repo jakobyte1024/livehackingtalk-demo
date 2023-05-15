@@ -38,8 +38,7 @@ Let's use the end of rockyoulist as that contains the sophisticated passwords
 
 ```bash
 cd /root/demotalk/jenkinsBrute/
-tail -n 15 /usr/share/wordlists/rockyou.txt > /root/demotalk/jenkinsBrute/passwordlist.txt
-sed -i 's/[\t ]//g;/^$/d' passwordlist.txt
+sed -n 14342050,14342075p /usr/share/wordlists/rockyou.txt > /root/demotalk/jenkinsBrute/passwordlist.txt
 ```
 ## Enum Module
 Let's get some details of Jenkins

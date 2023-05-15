@@ -65,7 +65,7 @@ controller:
             password: "a842000zhd"
           - id: "Robert.Bartsch"
             name: "Robert Bartsch"
-            password: "markinho"
+            password: "!@#$%1234pacr1234!@#$%"
           - id: "RicardoPope"
             name: "Ricardo Pope"
             password: "g3mm@;"
@@ -77,7 +77,7 @@ controller:
             password: "cheater"
           - id: "Jeffrey_van_d_Linden"
             name: "Jeffrey van der Linden"
-            password: "*7¡Vamos!"
+            password: "!@#$%67890QAZwsxh"
     authorizationStrategy: |-
       loggedInUsersCanDoAnything:
         allowAnonymousRead: false
