@@ -51,6 +51,7 @@ controller:
     - kubernetes:1.30.5
     - workflow-cps:2.94
     - workflow-aggregator:2.7
+    - job-dsl:1.78.1
   JCasC:
     credentials: |-
       system:
