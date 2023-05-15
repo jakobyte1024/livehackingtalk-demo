@@ -80,23 +80,15 @@ controller:
         jobs:
           - script: >
               job('socialweb-api-deploy') {
-                pipeline {
-                  agent any
-                  stages {
-                    stage('Checkout external proj') {
-                      steps {
-                        git branch: 'main',
-                        url: 'https://github.com/jakobyte1024/livehackingdemo-app.git'
-                        sh "ls -lat"
-                      }
-                    }
-          
-                    stage('Stage 1') {
-                      steps {
-                        echo 'Deploy backend container'
-                      }
-                    }
-                  }
+                scm {
+                  git('https://github.com/jakobyte1024/livehackingdemo-app.git')
+                }
+                triggers {
+                  scm('H/15 * * * *')
+                }
+                steps {
+                    sh "ls -lat"
+                    echo 'Deploy backend container'
                 }
               }
     securityRealm: |-
