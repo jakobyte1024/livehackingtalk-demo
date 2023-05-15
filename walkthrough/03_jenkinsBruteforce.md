@@ -53,15 +53,38 @@ set RPORT 8080
 set TARGETURI /
 exploit
 ```
+We detect that theres a pretty modern version of Jenkins running.
+```bash
+[+] 34.159.77.191:8080    - Jenkins Version 2.387.3
+[*] /script restricted (403)
+[*] /view/All/newJob restricted (403)
+[*] /asynchPeople/ restricted (403)
+[*] /systemInfo restricted (403)
+```
+There are no easy-to-use exploits available for this version
+```bash
+searchsploit Jenkins 2.3
+```
+So there are at least two options left:
+* attack the host
+* get access to Jenkins
+
+Getting access via Social Engineering or Passwordcracking is the first attempt.
 
 ## Login Scan Module
-
+If we want to access Jenkins as a user, we need to find a bit more information of login options.
 
 #### Get Login URL
-use Burpsuite
+There are typically two login-URLs in Jenkins-world
+* /j_acegi_security_check
+* j_spring_security_check
+or something the Administrator configured (like PingAccess or so)
+
+Let's use Burpsuite to find out details.
 
 ### Prepare Options
-prepare the exploit
+Now that we know how to login, we can use metasploit to brute force login.
+The exploit must be configured.
 
 ```bash
 msfconsole
