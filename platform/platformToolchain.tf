@@ -99,21 +99,6 @@ controller:
                   }
                 }
               }
-
-          - script: >
-              job('socialweb-api-ci') {
-                pipeline {
-                  agent any
-                  stages {
-                    stage('Checkout external proj') {
-                      steps {
-                        git branch: 'main',
-                        url: 'https://github.com/jakobyte1024/livehackingdemo-app.git'
-                        sh "ls -lat"
-                      }
-                    }
-
-
     securityRealm: |-
       local:
         allowsSignup: false
