@@ -102,6 +102,31 @@ controller:
                     maven('-e clean test')
                 }
               }
+          - script: >
+              pipelineJob('socialweb-api-stresstest') {
+                definition {
+                  cps {
+                    script("""\
+                      pipeline {
+                        agent any
+                        stages {
+                          stage ('prepare') {
+                            steps {
+                              git branch: 'main',
+                              url: 'https://github.com/jakobyte1024/livehackingdemo-app.git'
+                              sh "ls -lat"
+                            }
+                          }
+                          stage ('run') {
+                            steps {
+                              echo "stresstesting"
+                            }
+                          }
+                        }
+                      }""".stripIndent())
+                    }
+                  }
+                }
     securityRealm: |-
       local:
         allowsSignup: false
