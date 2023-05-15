@@ -62,6 +62,12 @@ controller:
                 password: "{AQAAABAAAAAQ1/JHKggxIlBcuVqegoa2AdyVaNvjWIFk430/vI4jEBM=}"
                 description: "Sample credentials of exampleuser"
                 scope: GLOBAL
+            - usernamePassword:
+                id: "exampleuser-creds-id2"
+                username: "exampleuser2"
+                password: "{AQAAABAAAAAQ1/JHKggxIlBcuVqegoa2AdyVaNvjWIFk430/vI4jEBM=}"
+                description: "Sample credentials of exampleuser"
+                scope: GLOBAL
     securityRealm: |-
       local:
         allowsSignup: false
