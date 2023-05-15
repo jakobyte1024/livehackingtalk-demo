@@ -51,7 +51,7 @@ controller:
     - kubernetes:1.30.5
     - workflow-cps:2.94
     - workflow-aggregator:2.7
-    - job-dsl:1.78.1
+    - job-dsl:1.81
   JCasC:
     credentials: |-
       system:
@@ -99,7 +99,7 @@ controller:
       loggedInUsersCanDoAnything:
         allowAnonymousRead: false
     jobs: |-
-      - script: |-
+      - script: |- >
         job('testJob1') {
             scm {
                 git('git://github.com/quidryan/aws-sdk-test.git')
@@ -111,7 +111,7 @@ controller:
                 maven('-e clean test')
             }
         }
-      - script: |-
+      - script: |- >
           job('testJob2') {
               scm {
                   git('git://github.com/quidryan/aws-sdk-test.git')
