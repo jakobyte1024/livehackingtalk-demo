@@ -1,5 +1,5 @@
 resource "google_dns_record_set" "msver" {
-  name         = "${var.environment}.${data.google_dns_managed_zone.env_dns_zone.dns_name}"
+  name         = "configs.${var.environment}.${data.google_dns_managed_zone.env_dns_zone.dns_name}"
   managed_zone = data.google_dns_managed_zone.env_dns_zone.name
   type         = "TXT"
   ttl          = 10
