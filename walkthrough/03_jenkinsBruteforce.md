@@ -36,6 +36,7 @@ cd /root/demotalk/jenkinsBrute/
 ## Prepare Passwordlist
 Let's use the end of rockyoulist as that contains the sophisticated passwords
 It contains 14344392 leaked passwords
+Rockyou.txt is a set of compromised passwords from the social media application developer also known as RockYou. It developed widgets for the Myspace application. In December 2009, the company experienced a data breach resulting in the exposure of more than 32 million user accounts. It was mainly because of the company’s policy of storing the passwords in cleartext.
 
 ```bash
 cd /root/demotalk/jenkinsBrute/
