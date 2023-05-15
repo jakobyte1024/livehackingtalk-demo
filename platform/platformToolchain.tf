@@ -79,15 +79,15 @@ controller:
       jobs: |-
         jobs:
           - script: >
-              job('socialweb-api-ci') {
+              job('testJob1') {
                 scm {
-                  git('https://github.com/jakobyte1024/livehackingdemo-app.git')
+                  git('git://github.com/quidryan/aws-sdk-test.git')
                 }
                 triggers {
-                  cron('H/15 * * * *')
+                  scm('H/15 * * * *')
                 }
                 steps {
-                  echo 'Built backend container'
+                    maven('-e clean test')
                 }
               }
     securityRealm: |-
