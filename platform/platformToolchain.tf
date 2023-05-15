@@ -79,17 +79,92 @@ controller:
       jobs: |-
         jobs:
           - script: >
-              job('testJob1') {
-                scm {
-                  git('git://github.com/quidryan/aws-sdk-test.git')
-                }
-                triggers {
-                  scm('H/15 * * * *')
-                }
-                steps {
-                    maven('-e clean test')
+            job('socialweb-api-deploy') {
+                pipeline {
+                  agent any
+                  stages {
+                    stage('Checkout external proj') {
+                      steps {
+                        git branch: 'main',
+                        url: 'https://github.com/jakobyte1024/livehackingdemo-app.git'
+                        sh "ls -lat"
+                      }
+                    }
+        
+                    stage('Stage 1') {
+                      steps {
+                        echo 'Deploy backend container'
+                      }
+                    }
+                  }
                 }
               }
+
+              - script: >
+              job('socialweb-api-ci') {
+                pipeline {
+                  agent any
+                  stages {
+                    stage('Checkout external proj') {
+                      steps {
+                        git branch: 'main',
+                        url: 'https://github.com/jakobyte1024/livehackingdemo-app.git'
+                        sh "ls -lat"
+                      }
+                    }
+        
+                    stage('Stage 1') {
+                      steps {
+                        echo 'Running CI to build the container'
+                      }
+                    }
+                  }
+                }
+              }
+
+              - script: >
+              job('socialweb-api-stresstest') {
+                pipeline {
+                  agent any
+                  stages {
+                    stage('Checkout external proj') {
+                      steps {
+                        git branch: 'main',
+                        url: 'https://github.com/jakobyte1024/livehackingdemo-app.git'
+                        sh "ls -lat"
+                      }
+                    }
+        
+                    stage('Stage 1') {
+                      steps {
+                        echo 'Stresstesting'
+                      }
+                    }
+                  }
+                }
+              }
+              - script: >
+              job('socialweb-api-debugbox') {
+                pipeline {
+                  agent any
+                  stages {
+                    stage('Checkout external proj') {
+                      steps {
+                        git branch: 'main',
+                        url: 'https://github.com/jakobyte1024/livehackingdemo-app.git'
+                        sh "ls -lat"
+                      }
+                    }
+        
+                    stage('Stage 1') {
+                      steps {
+                        echo 'Deploy debugbox'
+                      }
+                    }
+                  }
+                }
+              }
+
     securityRealm: |-
       local:
         allowsSignup: false
