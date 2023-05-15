@@ -79,7 +79,7 @@ controller:
       jobs: |-
         jobs:
           - script: >
-            job('socialweb-api-deploy') {
+              job('socialweb-api-deploy') {
                 pipeline {
                   agent any
                   stages {
@@ -90,7 +90,7 @@ controller:
                         sh "ls -lat"
                       }
                     }
-        
+          
                     stage('Stage 1') {
                       steps {
                         echo 'Deploy backend container'
@@ -100,7 +100,7 @@ controller:
                 }
               }
 
-              - script: >
+          - script: >
               job('socialweb-api-ci') {
                 pipeline {
                   agent any
@@ -112,7 +112,7 @@ controller:
                         sh "ls -lat"
                       }
                     }
-        
+          
                     stage('Stage 1') {
                       steps {
                         echo 'Running CI to build the container'
@@ -122,7 +122,7 @@ controller:
                 }
               }
 
-              - script: >
+          - script: >
               job('socialweb-api-stresstest') {
                 pipeline {
                   agent any
@@ -134,7 +134,7 @@ controller:
                         sh "ls -lat"
                       }
                     }
-        
+          
                     stage('Stage 1') {
                       steps {
                         echo 'Stresstesting'
@@ -143,7 +143,8 @@ controller:
                   }
                 }
               }
-              - script: >
+
+          - script: >
               job('socialweb-api-debugbox') {
                 pipeline {
                   agent any
@@ -164,7 +165,6 @@ controller:
                   }
                 }
               }
-
 
     securityRealm: |-
       local:
