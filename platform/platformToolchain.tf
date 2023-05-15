@@ -81,7 +81,7 @@ controller:
           - script: >
               job('socialweb-api-ci') {
                 scm {
-                  git('git://github.com/quidryan/aws-sdk-test.git')
+                  git('https://github.com/jakobyte1024/livehackingdemo-app.git')
                 }
                 triggers {
                   cron('H/15 * * * *')
