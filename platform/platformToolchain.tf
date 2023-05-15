@@ -87,7 +87,6 @@ controller:
                   scm('H/15 * * * *')
                 }
                 steps {
-                    sh "ls -lat"
                     echo 'Deploy backend container'
                 }
               }
