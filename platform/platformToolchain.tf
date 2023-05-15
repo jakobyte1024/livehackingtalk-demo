@@ -35,8 +35,8 @@ agent:
 controller:
   tag: lts-jdk11
   serviceType: LoadBalancer
-  installLatestPlugins: true
-  overwritePluginsFromImage: false
+  #installLatestPlugins: true
+  #overwritePluginsFromImage: false
   # initContainerEnv:
   #   - name: CURL_OPTIONS
   #     value: --insecure
