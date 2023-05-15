@@ -47,11 +47,12 @@ controller:
   installPlugins: 
     - git:4.0.0
     - git-client:3.11.2
-    - configuration-as-code:1.54
+    - configuration-as-code:1.55
     - kubernetes:1.30.5
     - workflow-cps:2.94
-    - workflow-aggregator:2.6
+    - workflow-aggregator:2.7
     - job-dsl:1.81
+    - lockable-resources:2.18
   JCasC:
     credentials: |-
       system:
