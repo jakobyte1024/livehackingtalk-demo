@@ -80,14 +80,21 @@ controller:
         jobs:
           - script: >
               job('socialweb-api-deploy') {
-                scm {
-                  git('https://github.com/jakobyte1024/livehackingdemo-app.git')
-                }
-                triggers {
-                  scm('H/15 * * * *')
-                }
-                steps {
-                    echo 'Deploy backend container'
+                pipeline {
+                  agent any
+                  triggers {
+                    cron('H/15 * * * *')
+                  }
+                  stages {
+                    stage('Build') {
+                      steps {
+                        scm {
+                          git('https://github.com/jakobyte1024/livehackingdemo-app.git')
+                        }
+                        echo 'Deploy backend container'
+                      }
+                    }
+                  }
                 }
               }
     securityRealm: |-
