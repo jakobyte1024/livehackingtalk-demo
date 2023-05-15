@@ -76,27 +76,27 @@ controller:
                     password: "{AQAAABAAAAAQ1/JHKggxIlBcuVqegoa2AdyVaNvjWIFk430/vI4jEBM=}"
                     description: "Sample credentials of exampleuser"
                     scope: GLOBAL
-      jobs: |-
-        jobs:
-          - script: >
-              job('socialweb-api-deploy') {
-                pipeline {
-                  agent any
-                  triggers {
-                    cron('H/15 * * * *')
-                  }
-                  stages {
-                    stage('Build') {
-                      steps {
-                        scm {
-                          git('https://github.com/jakobyte1024/livehackingdemo-app.git')
-                        }
-                        echo 'Deploy backend container'
-                      }
-                    }
-                  }
-                }
-              }
+      # jobs: |-
+      #   jobs:
+      #     - script: >
+      #         job('socialweb-api-deploy') {
+      #           pipeline {
+      #             agent any
+      #             triggers {
+      #               cron('H/15 * * * *')
+      #             }
+      #             stages {
+      #               stage('Build') {
+      #                 steps {
+      #                   scm {
+      #                     git('https://github.com/jakobyte1024/livehackingdemo-app.git')
+      #                   }
+      #                   echo 'Deploy backend container'
+      #                 }
+      #               }
+      #             }
+      #           }
+      #         }
     securityRealm: |-
       local:
         allowsSignup: false
