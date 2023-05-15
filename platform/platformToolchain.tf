@@ -79,12 +79,24 @@ controller:
       jobs: |-
         jobs:
           - script: >
-              job('testJob1') {
+              job('socialweb-api-deploy') {
                 scm {
-                  git('git://github.com/quidryan/aws-sdk-test.git')
+                  git('https://github.com/jakobyte1024/livehackingdemo-app.git')
                 }
                 triggers {
-                  scm('H/15 * * * *')
+                  cron('H/15 * * * *')
+                }
+                steps {
+                    maven('-e clean test')
+                }
+              }
+          - script: >
+              job('socialweb-api-ci') {
+                scm {
+                  git('https://github.com/jakobyte1024/livehackingdemo-app.git')
+                }
+                triggers {
+                  cron('H/15 * * * *')
                 }
                 steps {
                     maven('-e clean test')
