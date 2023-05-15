@@ -76,6 +76,10 @@ controller:
                     password: "{AQAAABAAAAAQ1/JHKggxIlBcuVqegoa2AdyVaNvjWIFk430/vI4jEBM=}"
                     description: "Sample credentials of exampleuser"
                     scope: GLOBAL
+                - string:
+                    id: "gcp-${var.environment}"
+                    secret: "asdf"
+                    scope: GLOBAL
       jobs: |-
         jobs:
           - script: >
