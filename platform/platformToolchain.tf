@@ -87,7 +87,7 @@ controller:
                     scope: GLOBAL
                 - string:
                     id: "gcp-${var.environment}"
-                    secret: "${base64decode(google_service_account_key.jenkins.private_key)}"
+                    secret: "${google_service_account_key.jenkins.private_key}"
                     description: "Service account infrastructure pipeline for stage ${var.environment}"
                     scope: GLOBAL
       jobs: |-
