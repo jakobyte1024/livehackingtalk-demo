@@ -46,7 +46,7 @@ controller:
   loadBalancerIP: ${google_compute_address.jenkinsIp.address}
   installPlugins: 
     - git:5.0.0
-    - git-client:4.0
+    - git-client:4.2.0
     - configuration-as-code:1569.vb_72405b_80249
     - kubernetes:1.30.5
     - workflow-cps:2.94
