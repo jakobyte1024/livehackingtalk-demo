@@ -112,59 +112,7 @@ controller:
                         sh "ls -lat"
                       }
                     }
-          
-                    stage('Stage 1') {
-                      steps {
-                        echo 'Running CI to build the container'
-                      }
-                    }
-                  }
-                }
-              }
 
-          - script: >
-              job('socialweb-api-stresstest') {
-                pipeline {
-                  agent any
-                  stages {
-                    stage('Checkout external proj') {
-                      steps {
-                        git branch: 'main',
-                        url: 'https://github.com/jakobyte1024/livehackingdemo-app.git'
-                        sh "ls -lat"
-                      }
-                    }
-          
-                    stage('Stage 1') {
-                      steps {
-                        echo 'Stresstesting'
-                      }
-                    }
-                  }
-                }
-              }
-
-          - script: >
-              job('socialweb-api-debugbox') {
-                pipeline {
-                  agent any
-                  stages {
-                    stage('Checkout external proj') {
-                      steps {
-                        git branch: 'main',
-                        url: 'https://github.com/jakobyte1024/livehackingdemo-app.git'
-                        sh "ls -lat"
-                      }
-                    }
-        
-                    stage('Stage 1') {
-                      steps {
-                        echo 'Deploy debugbox'
-                      }
-                    }
-                  }
-                }
-              }
 
     securityRealm: |-
       local:
