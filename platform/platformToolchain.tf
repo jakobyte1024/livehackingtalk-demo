@@ -53,6 +53,14 @@ controller:
     - workflow-aggregator:2.7
     - job-dsl:1.81
     - lockable-resources:2.18
+    - pipeline-stage-step 2.5
+    - pipeline-model-api 1.9.2
+    - workflow-job:2.41
+    - junit:1119.1121.vc43d0fc45561
+    - matrix-project:785.v06b_7f47b_c631
+    - pipeline-model-declarative-agent:1.1.1
+    - pipeline-model-extensions:1.9.2
+    - pipeline-model-definition:1.3.2
   JCasC:
     credentials: |-
       system:
