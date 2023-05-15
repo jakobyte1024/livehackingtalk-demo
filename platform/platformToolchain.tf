@@ -65,7 +65,7 @@ controller:
             password: "a842000zhd"
           - id: "Robert.Bartsch"
             name: "Robert Bartsch"
-            password: "xCvBnM,"
+            password: "markinho"
           - id: "RicardoPope"
             name: "Ricardo Pope"
             password: "g3mm@;"

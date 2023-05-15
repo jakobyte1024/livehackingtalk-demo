@@ -33,14 +33,12 @@ mv output.txt /root/demotalk/jenkinsBrute/userlist.txt
 cd /root/demotalk/jenkinsBrute/
 ```
 
-
-
 ## Prepare Passwordlist
 Let's use the end of rockyoulist as that contains the sophisticated passwords
 
 ```bash
 cd /root/demotalk/jenkinsBrute/
-tail -n15 /usr/share/wordlists/rockyou.txt > /root/demotalk/jenkinsBrute/passwordlist.txt
+tail -n 15 /usr/share/wordlists/rockyou.txt > /root/demotalk/jenkinsBrute/passwordlist.txt
 sed -i 's/[\t ]//g;/^$/d' passwordlist.txt
 ```
 ## Enum Module
