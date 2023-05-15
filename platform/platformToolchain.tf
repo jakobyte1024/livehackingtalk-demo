@@ -33,7 +33,7 @@ resource "helm_release" "jenkins" {
 agent:
   enabled: false
 controller:
-  tag: 2.300-centos
+  tag: 2.387.3-lts
   serviceType: LoadBalancer
   installLatestPlugins: false
   overwritePluginsFromImage: true
@@ -45,8 +45,8 @@ controller:
       value: --insecure
   loadBalancerIP: ${google_compute_address.jenkinsIp.address}
   installPlugins: 
-    - git:4.0.0
-    - git-client:3.11.2
+    - git:5.0.0
+    - git-client:4.0
     - configuration-as-code:1.55
     - kubernetes:1.30.5
     - workflow-cps:2.94
