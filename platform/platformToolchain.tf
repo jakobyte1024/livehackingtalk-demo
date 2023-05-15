@@ -32,52 +32,64 @@ resource "helm_release" "jenkins" {
   values = [<<EOF
 agent:
   enabled: false
+rbac:
+  create: true
 controller:
-  tag: lts-jdk11
+  tag: 2.387.3-lts-jdk11
   serviceType: LoadBalancer
   #installLatestPlugins: true
   #overwritePluginsFromImage: false
-  # initContainerEnv:
-  #   - name: CURL_OPTIONS
-  #     value: --insecure
-  # containerEnv:
-  #   - name: CURL_OPTIONS
-  #     value: --insecure
   loadBalancerIP: ${google_compute_address.jenkinsIp.address}
-  # installPlugins: 
-  #   - git:5.0.0
-  #   - git-client:4.2.0
-  #   - configuration-as-code:1569.vb_72405b_80249
-  #   - kubernetes:1.30.5
-  #   - workflow-cps:2.94
-  #   - workflow-aggregator:2.7
-  #   - job-dsl:1.81
-  #   - lockable-resources:2.18
-  #   - pipeline-stage-step:2.5
-  #   - pipeline-model-api:1.9.2
-  #   - workflow-job:2.41
-  #   - junit:1119.1121.vc43d0fc45561
-  #   - matrix-project:785.v06b_7f47b_c631
-  #   - pipeline-model-declarative-agent:1.1.1
-  #   - pipeline-model-extensions:1.9.2
-  #   - pipeline-model-definition:1.3.2
+  installPlugins: 
+    - git:5.0.0
+    - configuration-as-code:1625.v27444588cc3d
+    - kubernetes:3900.va_dce992317b_4
+    - workflow-aggregator:596.v8c21c963d92d
+    - job-dsl:1.82
+  sidecars:
+    configAutoReload:
+      enabled: true
   JCasC:
-    credentials: |-
-      system:
-        domainCredentials:
-          - credentials:
-            - usernamePassword:
-                id: "exampleuser-creds-id"
-                username: "exampleuser"
-                password: "{AQAAABAAAAAQ1/JHKggxIlBcuVqegoa2AdyVaNvjWIFk430/vI4jEBM=}"
-                description: "Sample credentials of exampleuser"
-                scope: GLOBAL
-            - usernamePassword:
-                id: "exampleuser-creds-id2"
-                username: "exampleuser2"
-                password: "{AQAAABAAAAAQ1/JHKggxIlBcuVqegoa2AdyVaNvjWIFk430/vI4jEBM=}"
-                description: "Sample credentials of exampleuser"
-                scope: GLOBAL
+    configScripts:
+      log-recorder: |-
+        jenkins:
+          log:
+            recorders:
+            - name: "useraccesslog"
+              loggers:
+                - level: "FINEST"
+                  name: "jenkins.security.SecurityListener"
+      credentials: |-
+        credentials:
+          system:
+            domainCredentials:
+              - credentials:
+                - usernamePassword:
+                    id: "exampleuser-creds-id"
+                    username: "exampleuser"
+                    password: "{AQAAABAAAAAQ1/JHKggxIlBcuVqegoa2AdyVaNvjWIFk430/vI4jEBM=}"
+                    description: "Sample credentials of exampleuser"
+                    scope: GLOBAL
+                - usernamePassword:
+                    id: "exampleuser-creds-id2"
+                    username: "exampleuser2"
+                    password: "{AQAAABAAAAAQ1/JHKggxIlBcuVqegoa2AdyVaNvjWIFk430/vI4jEBM=}"
+                    description: "Sample credentials of exampleuser"
+                    scope: GLOBAL
+      jobs: |-
+        jobs:
+          - script: >
+              job('testJob1') {
+                scm {
+                  git('git://github.com/quidryan/aws-sdk-test.git')
+                }
+                triggers {
+                  scm('H/15 * * * *')
+                }
+                steps {
+                    maven('-e clean test')
+                }
+              }
     securityRealm: |-
       local:
         allowsSignup: false
@@ -107,40 +119,7 @@ controller:
     authorizationStrategy: |-
       loggedInUsersCanDoAnything:
         allowAnonymousRead: false
-    jobs: |-
-      - script: >
-          multibranchPipelineJob('configuration-as-code') {
-              branchSources {
-                  git {
-                      id = 'configuration-as-code'
-                      remote('https://github.com/jenkinsci/configuration-as-code-plugin.git')
-                  }
-              }
-          }
-      - script: |- >
-        job('testJob1') {
-            scm {
-                git('git://github.com/quidryan/aws-sdk-test.git')
-            }
-            triggers {
-                scm('H/15 * * * *')
-            }
-            steps {
-                maven('-e clean test')
-            }
-        }
-      - script: |- >
-          job('testJob2') {
-              scm {
-                  git('git://github.com/quidryan/aws-sdk-test.git')
-              }
-              triggers {
-                  scm('H/15 * * * *')
-              }
-              steps {
-                  maven('-e clean test')
-              }
-          }
+  
 EOF
   ]
 }
