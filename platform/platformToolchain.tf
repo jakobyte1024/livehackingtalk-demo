@@ -19,6 +19,15 @@ resource "google_dns_record_set" "jenkins" {
   rrdatas = [google_compute_address.jenkinsIp.address]
 }
 
+resource "google_service_account" "jenkins" {
+  account_id   = "jenkins-sa-${var.environment}"
+  display_name = "jenkins-sa-${var.environment}t"
+}
+
+resource "google_service_account_key" "jenkins" {
+  service_account_id = google_service_account.jenkins.name
+}
+
 resource "helm_release" "jenkins" {
   name       = "conduit-jenkins"
   repository = "https://charts.jenkins.io"
@@ -78,7 +87,7 @@ controller:
                     scope: GLOBAL
                 - string:
                     id: "gcp-${var.environment}"
-                    secret: "asdf"
+                    secret: "${base64decode(google_service_account_key.jenkins.private_key)}"
                     description: "Service account infrastructure pipeline for stage ${var.environment}"
                     scope: GLOBAL
       jobs: |-
