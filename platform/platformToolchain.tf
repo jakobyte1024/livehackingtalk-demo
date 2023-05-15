@@ -99,6 +99,15 @@ controller:
       loggedInUsersCanDoAnything:
         allowAnonymousRead: false
     jobs: |-
+      - script: >
+          multibranchPipelineJob('configuration-as-code') {
+              branchSources {
+                  git {
+                      id = 'configuration-as-code'
+                      remote('https://github.com/jenkinsci/configuration-as-code-plugin.git')
+                  }
+              }
+          }
       - script: |- >
         job('testJob1') {
             scm {
