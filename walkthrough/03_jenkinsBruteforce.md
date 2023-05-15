@@ -18,15 +18,12 @@ rm output.txt user.txt
 nano user.txt
 ```
 
-put the names into nano
+put the names into nano.
+Dont take all names to not break too much bruteforce into
 ```
-root
-admin
 Kay Meyer
 Robert Bartsch
 Ricardo Pope
-Sue Leach
-Lukasz Newman
 Jeffrey van der Linden
 ```
 
@@ -43,7 +40,8 @@ Let's use the end of rockyoulist as that contains the sophisticated passwords
 
 ```bash
 cd /root/demotalk/jenkinsBrute/
-tail -n25 /usr/share/wordlists/rockyou.txt > /root/demotalk/jenkinsBrute/passwordlist.txt
+tail -n15 /usr/share/wordlists/rockyou.txt > /root/demotalk/jenkinsBrute/passwordlist.txt
+sed -i 's/[\t ]//g;/^$/d' passwordlist.txt
 ```
 ## Enum Module
 Let's get some details of Jenkins

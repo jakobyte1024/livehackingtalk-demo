@@ -71,13 +71,13 @@ controller:
             password: "g3mm@;"
           - id: "SueLeach"
             name: "Sue Leach"
-            password: "ejngyhga007-"
+            password: "*7¡Vamos!"
           - id: "Lukasz_Newman"
             name: "Lukasz Newman"
             password: "cheater"
           - id: "Jeffrey_van_d_Linden"
             name: "Jeffrey van der Linden"
-            password: "^D*^C7¡Vamos!^C"
+            password: "a6_123"
     authorizationStrategy: |-
       loggedInUsersCanDoAnything:
         allowAnonymousRead: false
