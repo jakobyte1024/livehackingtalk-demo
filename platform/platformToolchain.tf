@@ -98,7 +98,7 @@ controller:
       loggedInUsersCanDoAnything:
         allowAnonymousRead: false
     jobs: |-
-      - script: >
+      - script: |-
         job('testJob1') {
             scm {
                 git('git://github.com/quidryan/aws-sdk-test.git')
@@ -110,7 +110,7 @@ controller:
                 maven('-e clean test')
             }
         }
-  - script: >
+  - script: |-
       job('testJob2') {
           scm {
               git('git://github.com/quidryan/aws-sdk-test.git')
