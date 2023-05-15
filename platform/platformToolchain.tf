@@ -165,6 +165,7 @@ controller:
                 }
               }
 
+
     securityRealm: |-
       local:
         allowsSignup: false
