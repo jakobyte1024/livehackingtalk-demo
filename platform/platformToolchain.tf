@@ -80,22 +80,14 @@ controller:
         jobs:
           - script: >
               job('socialweb-api-ci') {
-                pipeline {
-                  agent any
-                  triggers {
-                    cron('H/15 * * * *')
-                  }
-                  stages {
-                    stage('Build') {
-                      steps {
-                        git branch: 'main',
-                        url: 'https://github.com/jakobyte1024/livehackingdemo-app.git'
-                
-                        sh "ls -lat"
-                        echo 'Built backend container'
-                      }
-                    }
-                  }
+                scm {
+                  git('git://github.com/quidryan/aws-sdk-test.git')
+                }
+                triggers {
+                  cron('H/15 * * * *')
+                }
+                steps {
+                  echo 'Built backend container'
                 }
               }
     securityRealm: |-
