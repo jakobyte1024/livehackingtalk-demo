@@ -63,9 +63,9 @@ controller:
           - id: "KMeyer"
             name: "Kay Meyer"
             password: "a842000zhd"
-          - id: "RobertB"
+          - id: "Robert.Bartsch"
             name: "Robert Bartsch"
-            password: "^ZxCvBnM,"
+            password: "xCvBnM,"
           - id: "RicardoPope"
             name: "Ricardo Pope"
             password: "g3mm@;"
@@ -77,7 +77,7 @@ controller:
             password: "cheater"
           - id: "Jeffrey_van_d_Linden"
             name: "Jeffrey van der Linden"
-            password: "a6_123"
+            password: "*7¡Vamos!"
     authorizationStrategy: |-
       loggedInUsersCanDoAnything:
         allowAnonymousRead: false
