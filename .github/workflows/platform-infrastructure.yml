@@ -32,6 +32,7 @@ jobs:
         shell: bash
 
   step2:
+    needs: [step1]
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -52,6 +53,7 @@ jobs:
         shell: bash
 
   step3:
+    needs: [step2]
     runs-on: ubuntu-latest
     defaults:
       run:
