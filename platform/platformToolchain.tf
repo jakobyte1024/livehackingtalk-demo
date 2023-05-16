@@ -312,7 +312,7 @@ controller:
     authorizationStrategy: |-
       loggedInUsersCanDoAnything:
         allowAnonymousRead: false
-
+ 
 EOF
   ]
 }
