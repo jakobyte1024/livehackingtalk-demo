@@ -7,10 +7,6 @@ on:
         description: 'Target environment'
         required: true
         default: "test"
-  push:
-    paths:
-      - platform/**
-    branches: [ "main" ]
 
 env:
   TF_VAR_environment: '${{ github.event.inputs.environment }}'
