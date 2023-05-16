@@ -5,7 +5,7 @@ resource "kubernetes_namespace" "toolchainNamespace" {
 }
 
 resource "google_compute_address" "jenkinsIp" {
-  name          = "jenkinsip"
+  name          = "jenkinsip${var.environment}"
   region        = "europe-west3"
   address_type  = "EXTERNAL"
 }
@@ -28,12 +28,10 @@ resource "google_service_account_key" "jenkins" {
   service_account_id = google_service_account.jenkins.name
 }
 
-resource "google_service_account_iam_binding" "jenkins" {
+resource "google_service_account_iam_member" "jenkins" {
   service_account_id = google_service_account.jenkins.name
   role               = "roles/iam.serviceAccountUser"
-  members = [
-    "serviceAccount:${google_service_account.jenkins.email}",
-  ]
+  member = "serviceAccount:${google_service_account.jenkins.email}"
 }
 
 resource "google_service_account_iam_member" "jenkinsMember" {
@@ -42,13 +40,10 @@ resource "google_service_account_iam_member" "jenkinsMember" {
   member             = "serviceAccount:${google_service_account.jenkins.email}"
 }
 
-resource "google_project_iam_binding" "project" {
+resource "google_project_iam_member" "project" {
   project = "thorsten-jakoby-tj-projekt"
   role    = "roles/editor"
-
-  members = [
-    "serviceAccount:${google_service_account.jenkins.email}",
-  ]
+  member = "serviceAccount:${google_service_account.jenkins.email}"
 }
 
 resource "helm_release" "jenkins" {
@@ -316,4 +311,3 @@ controller:
 EOF
   ]
 }
-  

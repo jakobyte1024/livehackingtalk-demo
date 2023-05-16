@@ -6,12 +6,36 @@ on:
       - platform/**
     branches: [ "main" ]
 
+env:
+  TF_VAR_environment: "test"
+  GOOGLE_CREDENTIALS: ${{ secrets.GCPCRED }}
+
 jobs:
-  build:
+  step1:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: platform
+        working-directory: platform/step1
+
+    steps:
+      - name: Checkout 
+        uses: actions/checkout@v3
+
+      - name: Terraform init
+        run: |
+          terraform init
+        shell: bash
+
+      - name: Terraform apply
+        run: |
+          terraform apply --auto-approve
+        shell: bash
+
+  step2:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: platform/step2
 
     steps:
       - name: Checkout 
@@ -21,14 +45,28 @@ jobs:
         run: |
           terraform init
         shell: bash
-        env:
-          TF_VAR_environment: "test"
-          GOOGLE_CREDENTIALS: ${{ secrets.GCPCRED }}
+
+      - name: Terraform apply
+        run: |
+          terraform apply --auto-approve
+        shell: bash
+
+  step3:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: platform/step3
+
+    steps:
+      - name: Checkout 
+        uses: actions/checkout@v3
+      
+      - name: Terraform init
+        run: |
+          terraform init
+        shell: bash
       
       - name: Terraform apply
         run: |
           terraform apply --auto-approve
         shell: bash
-        env:
-          TF_VAR_environment: "test"
-          GOOGLE_CREDENTIALS: ${{ secrets.GCPCRED }}

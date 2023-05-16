@@ -1,20 +1,3 @@
-resource "kubernetes_namespace" "conduitApp" {
-  metadata {
-    name = "conduit-app"
-  }
-}
-
-resource "helm_release" "conduitDb" {
-  name       = "database"
-  repository = "https://cloudnative-pg.github.io/charts"
-  chart      = "cloudnative-pg"
-  namespace  = "conduit-app"
-
-  depends_on = [
-    kubernetes_namespace.conduitApp
-  ]
-}
-
 resource "kubernetes_manifest" "psqlInitCredentials" {
   manifest = {
     "apiVersion" = "v1"
@@ -29,6 +12,12 @@ resource "kubernetes_manifest" "psqlInitCredentials" {
         "username" = "YXBw" # must be "app"
         "password" = "Y29uZHVpN0RhN2FiYXMzUHIwZFVTM3JQYVNTdzByZA=="
     }
+  }
+}
+
+data "kubernetes_namespace" "conduitApp" {
+  metadata {
+    name = "conduit-app"
   }
 }
 
@@ -71,7 +60,7 @@ resource "kubernetes_manifest" "psqlCluster" {
        "serviceAccountTemplate" = {
            "metadata" = {
                 "annotations" = {
-                    "iam.gke.io/gcp-service-account" = google_service_account.conduit.email
+                    "iam.gke.io/gcp-service-account" = data.google_service_account.conduit.email
                 }
            }
        }
@@ -79,7 +68,7 @@ resource "kubernetes_manifest" "psqlCluster" {
   }
 
   depends_on = [
-    kubernetes_namespace.conduitApp,
+    data.kubernetes_namespace.conduitApp,
     google_storage_bucket.databaseBackupBucket,
     kubernetes_manifest.psqlInitCredentials
   ]
@@ -122,11 +111,11 @@ resource "google_storage_bucket" "databaseBackupBucket" {
 resource "google_storage_bucket_iam_member" "bindingPsqlBucket" {
   bucket = google_storage_bucket.databaseBackupBucket.name
   role = "roles/storage.admin"
-  member = "serviceAccount:${google_service_account.conduit.email}"
+  member = "serviceAccount:${data.google_service_account.conduit.email}"
 }
 
 resource "google_compute_address" "conduitBackendIp" {
-  name          = "conduitbackendip"
+  name          = "conduitbackendip${var.environment}"
   region        = "europe-west3"
   address_type  = "EXTERNAL"
 }

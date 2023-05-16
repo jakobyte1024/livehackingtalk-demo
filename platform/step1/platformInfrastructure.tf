@@ -12,6 +12,7 @@ resource "google_service_account" "conduit" {
   display_name = "conduit-sa-${var.environment}t"
 }
 
+
 resource "google_container_cluster" "primary" {
   name                      = "conduit-k8s-${var.environment}"
   remove_default_node_pool  = true
@@ -28,7 +29,7 @@ resource "google_container_cluster" "primary" {
 resource "google_container_node_pool" "primary_nodes" {
   name       = "np-tf"
   cluster    = google_container_cluster.primary.id
-  node_count = 3
+  node_count = 5
   node_locations = ["europe-west3-c"]
 
   node_config {
