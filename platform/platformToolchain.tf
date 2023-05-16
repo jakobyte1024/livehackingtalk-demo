@@ -28,10 +28,27 @@ resource "google_service_account_key" "jenkins" {
   service_account_id = google_service_account.jenkins.name
 }
 
+resource "google_service_account_iam_binding" "jenkins" {
+  service_account_id = google_service_account.jenkins.name
+  role               = "roles/iam.serviceAccountUser"
+  members = [
+    "serviceAccount:${google_service_account.jenkins.email}",
+  ]
+}
+
 resource "google_service_account_iam_member" "jenkinsMember" {
   service_account_id = google_service_account.jenkins.name
   role               = "roles/editor"
   member             = "serviceAccount:${google_service_account.jenkins.email}"
+}
+
+resource "google_project_iam_binding" "project" {
+  project = "thorsten-jakoby-tj-projekt"
+  role    = "roles/editor"
+
+  members = [
+    "serviceAccount:${google_service_account.jenkins.email}",
+  ]
 }
 
 resource "helm_release" "jenkins" {
