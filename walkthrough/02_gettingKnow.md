@@ -28,12 +28,7 @@ So we need to brute force to gain more information.
 To do so, we use a nice wordlist with often used domain names (around 5000 names)
 
 ```bash
-mkdir -p /root/demotalk/dnsEnum
-cd /root/demotalk/dnsEnum
-
-wget https://raw.githubusercontent.com/danielmiessler/SecLists/master/Discovery/DNS/subdomains-top1million-5000.txt
-
-dnsrecon -t brt -d nevervictimconsult.xyz --threads 25 -D /root/demotalk/dnsEnum/subdomains-top1million-5000.txt
+dnsrecon -t brt -d nevervictimconsult.xyz --threads 25 -D /usr/share/wordlists/subdomains-top1million-5000.txt
 
 ```
 
@@ -43,7 +38,7 @@ One may be called "test".
 Let's check that by enumerating the subdomain.
 
 ```bash
-dnsrecon -t brt -d test.nevervictimconsult.xyz --threads 25 -D /root/demotalk/dnsEnum/subdomains-top1million-5000.txt
+dnsrecon -t brt -d test.nevervictimconsult.xyz --threads 25 -D /usr/share/wordlists/subdomains-top1million-5000.txt
 ```
 
 There's more!

@@ -3,45 +3,6 @@ This section aims to login to the company's Jenkins instance.
 To do so, we'll prepare a list of usernames and check login with rockyou list.
 Before login can be bruteforced, the login URL must be identified via BurpSuite.
 
-## Open Questions
-- how do I know the port
-- how do I know the URL
-
-## Prepare Usernamelist
-
-```bash
-mkdir -p /root/demotalk/jenkinsBrute/
-cd /root/demotalk
-git clone https://github.com/captain-noob/username-list-generator.git
-cd username-list-generator
-rm output.txt user.txt
-nano user.txt
-```
-
-put the names into nano.
-Dont take all names to not break too much bruteforce into
-```
-Kay Meyer
-Robert Bartsch
-Ricardo Pope
-Jeffrey van der Linden
-```
-
-```bash
-python3 userlistcreator.py
-mv output.txt /root/demotalk/jenkinsBrute/userlist.txt
-cd /root/demotalk/jenkinsBrute/
-```
-
-## Prepare Passwordlist
-Let's use the end of rockyoulist as that contains the sophisticated passwords
-It contains 14344392 leaked passwords
-Rockyou.txt is a set of compromised passwords from the social media application developer also known as RockYou. It developed widgets for the Myspace application. In December 2009, the company experienced a data breach resulting in the exposure of more than 32 million user accounts. It was mainly because of the company’s policy of storing the passwords in cleartext.
-
-```bash
-cd /root/demotalk/jenkinsBrute/
-sed -n 14342050,14342075p /usr/share/wordlists/rockyou.txt > /root/demotalk/jenkinsBrute/passwordlist.txt
-```
 ## Enum Module
 Let's get some details of Jenkins
 
@@ -70,6 +31,41 @@ So there are at least two options left:
 * get access to Jenkins
 
 Getting access via Social Engineering or Passwordcracking is the first attempt.
+
+## Prepare Usernamelist
+
+```bash
+mkdir -p /root/demotalk/jenkinsBrute/
+cd /root/demotalk/username-list-generator
+rm output.txt user.txt
+nano user.txt
+```
+
+put the names into nano.
+Dont take all names to not break too much bruteforce into
+```
+Kay Meyer
+Robert Bartsch
+Ricardo Pope
+Jeffrey van der Linden
+```
+
+```bash
+python3 userlistcreator.py
+mv output.txt /root/demotalk/jenkinsBrute/userlist.txt
+cd /root/demotalk/jenkinsBrute/
+```
+
+## Prepare Passwordlist
+Let's use the end of rockyoulist as that contains the sophisticated passwords
+It contains 14344392 leaked passwords
+Rockyou.txt is a set of compromised passwords from the social media application developer also known as RockYou. It developed widgets for the Myspace application. In December 2009, the company experienced a data breach resulting in the exposure of more than 32 million user accounts. It was mainly because of the company’s policy of storing the passwords in cleartext.
+
+```bash
+cd /root/demotalk/jenkinsBrute/
+sed -n 14342050,14342075p /usr/share/wordlists/rockyou.txt > /root/demotalk/jenkinsBrute/passwordlist.txt
+```
+
 
 ## Login Scan Module
 If we want to access Jenkins as a user, we need to find a bit more information of login options.

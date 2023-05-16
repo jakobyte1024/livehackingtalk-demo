@@ -1,13 +1,19 @@
 name: Platform Infrastructure
 
 on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Target environment'
+        required: true
+        default: "test"
   push:
     paths:
       - platform/**
     branches: [ "main" ]
 
 env:
-  TF_VAR_environment: "test"
+  TF_VAR_environment: '${{ github.event.inputs.environment }}'
   GOOGLE_CREDENTIALS: ${{ secrets.GCPCRED }}
 
 jobs:
