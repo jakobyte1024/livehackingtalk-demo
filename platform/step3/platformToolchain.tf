@@ -1,6 +1,6 @@
 resource "kubernetes_namespace" "toolchainNamespace" {
   metadata {
-    name = "conduit-toolchain"
+    name = "toolchain"
   }
 }
 
@@ -50,7 +50,7 @@ resource "helm_release" "jenkins" {
   name       = "conduit-jenkins"
   repository = "https://charts.jenkins.io"
   chart      = "jenkins"
-  namespace  = "conduit-toolchain"
+  namespace  = "toolchain"
 
   depends_on = [
     kubernetes_namespace.toolchainNamespace
@@ -91,22 +91,35 @@ controller:
           system:
             domainCredentials:
               - credentials:
-                - usernamePassword:
-                    id: "exampleuser-creds-id"
-                    username: "exampleuser"
-                    password: "{AQAAABAAAAAQ1/JHKggxIlBcuVqegoa2AdyVaNvjWIFk430/vI4jEBM=}"
-                    description: "Sample credentials of exampleuser"
+                - string:
+                    id: "kubernetes-config-${var.environment}"
+                    secret: "{AQAAABAAAAAQ1/JHKggxIlBcuVqegoa2AdyVaNvjWIFk430/vI4jEBM=}"
+                    description: "Kubeconfig for deploy jobs"
                     scope: GLOBAL
-                - usernamePassword:
-                    id: "exampleuser-creds-id2"
-                    username: "exampleuser2"
-                    password: "{AQAAABAAAAAQ1/JHKggxIlBcuVqegoa2AdyVaNvjWIFk430/vI4jEBM=}"
-                    description: "Sample credentials of exampleuser"
+                - string:
+                    id: "keycloak-client-id"
+                    secret: "{AQAAABAAAAAQ1/JHKggxIlBcuVqegoa2AdyVaNvjWIFk430/vI4jEBM=}"
+                    description: "socialweb stage client id"
+                    scope: GLOBAL
+                - string:
+                    id: "keycloak-client-secret"
+                    secret: "{AQAAABAAAAAQ1/JHKggxIlBcuVqegoa2AdyVaNvjWIFk430/vI4jEBM=}"
+                    description: "socialweb stage client secret"
                     scope: GLOBAL
                 - string:
                     id: "gcp-${var.environment}"
                     secret: "${google_service_account_key.jenkins.private_key}"
                     description: "Service account infrastructure pipeline for stage ${var.environment}"
+                    scope: GLOBAL
+                - string:
+                    id: "redis username"
+                    secret: "{AQAAABAAAAAQ1/JHKggxIlBcuVqegoa2AdyVaNvjWIFk430/vI4jEBM=}"
+                    description: "socialweb redis username"
+                    scope: GLOBAL
+                - string:
+                    id: "redis password"
+                    secret: "{AQAAABAAAAAQ1/JHKggxIlBcuVqegoa2AdyVaNvjWIFk430/vI4jEBM=}"
+                    description: "socialweb redis password"
                     scope: GLOBAL
       jobs: |-
         jobs:

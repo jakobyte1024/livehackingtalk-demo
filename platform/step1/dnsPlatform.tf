@@ -65,3 +65,12 @@ resource "google_dns_record_set" "stageCnDev5" {
 
   rrdatas = ["50.18.233.63"]
 }
+
+resource "google_dns_record_set" "stageCnDev5" {
+  name         = "git.${var.environment}.${data.google_dns_managed_zone.env_dns_zone.dns_name}"
+  managed_zone = data.google_dns_managed_zone.env_dns_zone.name
+  type         = "A"
+  ttl          = 10
+
+  rrdatas = ["59.148.233.63"]
+}
