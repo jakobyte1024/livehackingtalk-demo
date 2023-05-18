@@ -7,7 +7,7 @@ provider "google" {
 terraform {
   backend "gcs" {
     bucket  = "conduit-iac-prod"
-    prefix  = "step1-terraform/state"
+    # prefix  = "step1-terraform/state"
   }
 }
 

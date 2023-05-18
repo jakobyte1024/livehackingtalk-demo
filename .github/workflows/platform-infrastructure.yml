@@ -25,7 +25,8 @@ jobs:
 
       - name: Terraform init
         run: |
-          terraform init
+          terraform init \
+            -backend-config="prefix=$TF_VAR_environment/step1-terraform/state"
         shell: bash
 
       - name: Terraform apply
@@ -46,7 +47,8 @@ jobs:
       
       - name: Terraform init
         run: |
-          terraform init
+          terraform init \
+            -backend-config="prefix=$TF_VAR_environment/step1-terraform/state"
         shell: bash
 
       - name: Terraform apply
@@ -67,7 +69,8 @@ jobs:
       
       - name: Terraform init
         run: |
-          terraform init
+          terraform init \
+            -backend-config="prefix=$TF_VAR_environment/step1-terraform/state"
         shell: bash
       
       - name: Terraform apply

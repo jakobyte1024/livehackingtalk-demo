@@ -64,3 +64,7 @@ gcloud compute ssh --zone "europe-west3-c" "tjpentest1-vm"
 # Noch offen
 Jenkins Access Logs in Container Log bringen
 login guesses deutlich schneller
+
+# Valid environment names
+* test
+* staging

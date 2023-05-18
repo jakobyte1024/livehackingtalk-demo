@@ -2,8 +2,9 @@ export GOOGLE_APPLICATION_CREDENTIALS=~/.gcpCreds
 
 export TF_VAR_environment="test"
 
-terraform init
+terraform init \
+    -backend-config="prefix=$TF_VAR_environment/step1-terraform/state"
 #terraform apply --auto-approve
-terraform destroy
+#terraform destroy
 
 rm -rf .terraform*
