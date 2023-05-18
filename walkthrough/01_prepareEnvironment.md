@@ -101,6 +101,14 @@ wget https://github.com/vmware-archive/octant/releases/download/v0.25.1/octant_0
 sudo dpkg -i octant_0.25.1_Linux-64bit.deb
 ```
 
+## cleanup
+
+```bash
+rm -r /root/demotalk/cloudAccess /root/demotalk/jenkinsBrute
+rm /root/.kube/config
+rm -r /root/.config/gcloud/
+```
+
 ## Prepare toolings
 Some tools of the architecture must be prepared manually.
 

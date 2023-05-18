@@ -29,7 +29,6 @@ To do so, we use a nice wordlist with often used domain names (around 5000 names
 
 ```bash
 dnsrecon -t brt -d nevervictimconsult.xyz --threads 25 -D /usr/share/wordlists/subdomains-top1million-5000.txt
-
 ```
 
 We see, there are at least 17 records. 
