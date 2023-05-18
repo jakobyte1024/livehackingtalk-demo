@@ -9,7 +9,7 @@ Lets decrypt them
 ### Get the secret
 Open 
 ```
-    http://jenkins.test.nevervictimconsult.xyz:8080/script
+http://jenkins.test.nevervictimconsult.xyz:8080/script
 ```
 and start following script
 ```java
@@ -27,14 +27,14 @@ Paste it into Kali
 ```bash
 mkdir -p /root/demotalk/cloudAccess
 cd /root/demotalk/cloudAccess
-nano encrypted.json
+nano encoded.json
 ```
 
 paste the string into `encrypted.json` and decode it then
 
 ```bash
 cd /root/demotalk/cloudAccess
-cat encrypted.json | base64 --decode > gcpSa.json
+cat encode.json | base64 --decode > gcpSa.json
 ```
 
 ### Login to GCP

