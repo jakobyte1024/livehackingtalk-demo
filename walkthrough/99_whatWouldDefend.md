@@ -6,3 +6,10 @@
 * Brute Force detection
 * Rate Limiting
 * Root Shell Spawn detection
+
+
+# Controls to establish
+
+* Cloud DNS to stream logs to a SIEM
+* ReverseProxy (ingress/nginx) in front of Jenkins
+* GCP IAM Observability
