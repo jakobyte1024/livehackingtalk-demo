@@ -1,0 +1,79 @@
+name: Platform Infrastructure Destroy
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Target environment'
+        required: true
+        default: "test"
+
+env:
+  TF_VAR_environment: '${{ github.event.inputs.environment }}'
+  GOOGLE_CREDENTIALS: ${{ secrets.GCPCRED }}
+
+jobs:
+  step3:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: platform/step3
+
+    steps:
+      - name: Checkout 
+        uses: actions/checkout@v3
+
+      - name: Terraform init
+        run: |
+          terraform init \
+            -backend-config="prefix=$TF_VAR_environment/step3-terraform/state"
+        shell: bash
+
+      - name: Terraform apply
+        run: |
+          terraform destroy --auto-approve
+        shell: bash
+
+  step2:
+    needs: [step3]
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: platform/step2
+
+    steps:
+      - name: Checkout 
+        uses: actions/checkout@v3
+      
+      - name: Terraform init
+        run: |
+          terraform init \
+            -backend-config="prefix=$TF_VAR_environment/step2-terraform/state"
+        shell: bash
+
+      - name: Terraform apply
+        run: |
+          terraform destroy --auto-approve
+        shell: bash
+
+  step1:
+    needs: [step2]
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: platform/step1
+
+    steps:
+      - name: Checkout 
+        uses: actions/checkout@v3
+      
+      - name: Terraform init
+        run: |
+          terraform init \
+            -backend-config="prefix=$TF_VAR_environment/step1-terraform/state"
+        shell: bash
+      
+      - name: Terraform apply
+        run: |
+          terraform destroy --auto-approve
+        shell: bash
