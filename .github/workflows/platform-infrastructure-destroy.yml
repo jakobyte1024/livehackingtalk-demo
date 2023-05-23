@@ -20,7 +20,7 @@ jobs:
         working-directory: platform/step3
 
     steps:
-      - name: Checkout 
+      - name: Checkout
         uses: actions/checkout@v3
 
       - name: Terraform init
@@ -31,7 +31,7 @@ jobs:
 
       - name: Terraform apply
         run: |
-          terraform destroy --auto-approve
+          terraform destroy --auto-approve  -lock=false
         shell: bash
 
   step2:
@@ -42,9 +42,9 @@ jobs:
         working-directory: platform/step2
 
     steps:
-      - name: Checkout 
+      - name: Checkout
         uses: actions/checkout@v3
-      
+
       - name: Terraform init
         run: |
           terraform init \
@@ -64,15 +64,15 @@ jobs:
         working-directory: platform/step1
 
     steps:
-      - name: Checkout 
+      - name: Checkout
         uses: actions/checkout@v3
-      
+
       - name: Terraform init
         run: |
           terraform init \
             -backend-config="prefix=$TF_VAR_environment/step1-terraform/state"
         shell: bash
-      
+
       - name: Terraform apply
         run: |
           terraform destroy --auto-approve
