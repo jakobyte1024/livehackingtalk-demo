@@ -340,7 +340,7 @@ resource "kubernetes_manifest" "jenkinsIngress" {
 
     "spec" = {
       "rules" = [{
-        "host" =  google_dns_record_set.jenkins.name
+        "host" =  trimsuffix(google_dns_record_set.jenkins.name, ".")
         "http" = {
           "paths"  = [{
             "path" = "/"
