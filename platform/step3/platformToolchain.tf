@@ -339,20 +339,20 @@ resource "kubernetes_manifest" "jenkinsIngress" {
     }
 
     "spec" = {
-      "rules" = {
+      "rules" = [{
         "host" =  google_compute_address.jenkinsIp.address
         "http" = {
-          "paths"  = {
-            "path" = "/(.*)"
+          "paths"  = [{
+            "path" = "/*"
             "backend" = {
               "serviceName" = "conduit-jenkins"
               "servicePort" = "8080"
             }
 
 
-          }
+          }]
         }
-      }
+      }]
     }
   }
 
