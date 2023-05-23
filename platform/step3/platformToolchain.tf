@@ -340,7 +340,7 @@ resource "kubernetes_manifest" "jenkinsIngress" {
 
     "spec" = {
       "rules" = {
-        "host" =  ${google_compute_address.jenkinsIp.address}
+        "host" =  google_compute_address.jenkinsIp.address
         "http" = {
           "paths"  = {
             "path" = "/(.*)"
