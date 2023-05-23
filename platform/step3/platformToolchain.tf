@@ -63,11 +63,11 @@ rbac:
   create: true
 controller:
   tag: 2.387.3-lts-jdk11
-  serviceType: LoadBalancer
+  serviceType: NodePort
   #installLatestPlugins: true
   #overwritePluginsFromImage: false
-  loadBalancerIP: ${google_compute_address.jenkinsIp.address}
-  installPlugins: 
+  #loadBalancerIP: ${google_compute_address.jenkinsIp.address}
+  installPlugins:
     - git:5.0.0
     - configuration-as-code:1625.v27444588cc3d
     - kubernetes:3900.va_dce992317b_4
@@ -320,7 +320,46 @@ controller:
     authorizationStrategy: |-
       loggedInUsersCanDoAnything:
         allowAnonymousRead: false
- 
+
 EOF
+  ]
+}
+
+
+resource "kubernetes_manifest" "jenkinsIngress" {
+  manifest = {
+    "apiVersion" = "networking.k8s.io/v1"
+    "kind"       = "Ingress"
+    "metadata" = {
+      "name"      = "jenkins-ingress"
+      "namespace" = "toolchain"
+      "annotations" = {
+        "nginx.ingress.kubernetes.io/rewrite-target" = "/$1"
+      }
+    }
+
+    "spec" = {
+      "rules" = {
+        "host" =  ${google_compute_address.jenkinsIp.address}
+        "http" = {
+          "paths"  = {
+            "path" = "/(.*)"
+            "backend" = {
+              "serviceName" = "conduit-jenkins"
+              "servicePort" = "8080"
+            }
+
+
+          }
+        }
+      }
+    }
+  }
+
+  depends_on = [
+    kubernetes_namespace.toolchainNamespace,
+    google_compute_address.jenkinsIp,
+    google_dns_record_set.jenkins,
+    helm_release.jenkins
   ]
 }
