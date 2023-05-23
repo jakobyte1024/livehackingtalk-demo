@@ -14,3 +14,20 @@ resource "helm_release" "conduitDb" {
     kubernetes_namespace.conduitApp
   ]
 }
+
+resource "kubernetes_namespace" "ingressNginx" {
+  metadata {
+    name = "ingress-nginx"
+  }
+}
+
+resource "helm_release" "ingressNginxController" {
+  name       = "ingress-nginx-controller"
+  repository = "https://kubernetes.github.io/ingress-nginx/"
+  chart      = "ingress-nginx"
+  namespace  = "ingress-nginx"
+
+  depends_on = [
+    kubernetes_namespace.ingressNginx
+  ]
+}
