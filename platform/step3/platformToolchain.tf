@@ -346,8 +346,12 @@ resource "kubernetes_manifest" "jenkinsIngress" {
             "path" = "/*"
             "pathType" = "Prefix"
             "backend" = {
-              "serviceName" = "conduit-jenkins"
-              "servicePort" = "8080"
+              "service" = {
+                "name" = "conduit-jenkins"
+                "port" = {
+                  "number" = "8080"
+                }
+              }
             }
 
 
