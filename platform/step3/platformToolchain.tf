@@ -334,9 +334,9 @@ resource "kubernetes_manifest" "jenkinsIngress" {
       "name"      = "jenkins-ingress"
       "namespace" = "toolchain"
       "annotations" = {
-        "ubernetes.io/ingress.class"= "nginx"
+        "kubernetes.io/ingress.class"= "nginx"
         #"nginx.ingress.kubernetes.io/ingress.global-static-ip-name"= google_compute_address.jenkinsIp.name
-        #"nginx.ingress.kubernetes.io/rewrite-target" = "/$1"
+        #"nginx.ingress.kubernetes.io/rewrite-target" = "/"
 
       }
     }
