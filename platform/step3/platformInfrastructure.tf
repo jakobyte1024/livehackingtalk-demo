@@ -9,4 +9,3 @@ data "google_service_account" "conduit" {
 data "google_container_cluster" "primary" {
   name        = "conduit-k8s-${var.environment}"
 }
- 
