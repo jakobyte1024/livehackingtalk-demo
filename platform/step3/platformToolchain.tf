@@ -336,7 +336,7 @@ resource "kubernetes_manifest" "jenkinsIngress" {
       "annotations" = {
         "kubernetes.io/ingress.class"= "nginx"
         #"nginx.ingress.kubernetes.io/ingress.global-static-ip-name"= google_compute_address.jenkinsIp.name
-        "nginx.ingress.kubernetes.io/rewrite-target" = "/$1"
+        "nginx.ingress.kubernetes.io/rewrite-target" = "/"
 
       }
     }
@@ -346,7 +346,7 @@ resource "kubernetes_manifest" "jenkinsIngress" {
         "host" =  trimsuffix(google_dns_record_set.jenkins.name, ".")
         "http" = {
           "paths"  = [{
-            "path" = "/"
+            "path" = "/test"
             "pathType" = "Prefix"
             "backend" = {
               "service" = {
