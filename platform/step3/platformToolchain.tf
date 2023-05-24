@@ -345,7 +345,7 @@ resource "kubernetes_manifest" "jenkinsIngress" {
         "host" =  trimsuffix(google_dns_record_set.jenkins.name, ".")
         "http" = {
           "paths"  = [{
-            "path" = "/*"
+            "path" = "/"
             "pathType" = "Prefix"
             "backend" = {
               "service" = {
