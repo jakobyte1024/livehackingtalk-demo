@@ -21,18 +21,23 @@ resource "kubernetes_namespace" "ingressNginx" {
   }
 }
 
-resource "helm_release" "ingressNginxController" {
-  name       = "ingress-nginx-controller"
-  repository = "https://kubernetes.github.io/ingress-nginx/"
-  chart      = "ingress-nginx"
-  namespace  = "ingress-nginx"
+#resource "helm_release" "ingressNginxController" {
+#  name       = "ingress-nginx-controller"
+#  repository = "https://kubernetes.github.io/ingress-nginx/"
+#  chart      = "ingress-nginx"
+#  namespace  = "ingress-nginx"
 
-  set {
-    name  = "ingressClassResource.default"
-    value = "true"
-  }
+#  set {
+#    name  = "ingressClassResource.default"
+#    value = "true"
+#  }
 
-  depends_on = [
-    kubernetes_namespace.ingressNginx
-  ]
+#  depends_on = [
+#    kubernetes_namespace.ingressNginx
+#  ]
+#}
+
+resource "kubernetes_manifest" "ingressNginxController" {
+  manifest = "https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.5.1/deploy/static/provider/cloud/deploy.yaml"
+
 }
