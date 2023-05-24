@@ -27,6 +27,11 @@ resource "helm_release" "ingressNginxController" {
   chart      = "ingress-nginx"
   namespace  = "ingress-nginx"
 
+  set {
+    name  = "ingressClassResource.default"
+    value = "true"
+  }
+
   depends_on = [
     kubernetes_namespace.ingressNginx
   ]
