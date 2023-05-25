@@ -324,6 +324,15 @@ EOF
   ]
 }
 
+data "kubernetes_service_v1" "jenkinsService" {
+  metadata {
+    name = helm_release.jenkins.name
+  }
+
+  depends_on = [
+    helm_release.jenkins
+  ]
+}
 
 resource "kubernetes_manifest" "jenkinsIngress" {
   manifest = {
@@ -348,9 +357,9 @@ resource "kubernetes_manifest" "jenkinsIngress" {
             "pathType" = "Prefix"
             "backend" = {
               "service" = {
-                "name" = "conduit-jenkins"
+                "name" = kubernetes_service_v1.jenkinsService.name
                 "port" = {
-                  "number" = "8080"
+                  "number" = kubernetes_service_v1.jenkinsService.port
                 }
               }
             }
