@@ -6,6 +6,7 @@ resource "kubernetes_namespace" "toolchainNamespace" {
 
 data "google_compute_address" "ingressIp" {
   name          = "ingressip${var.environment}"
+  region        = "europe-west3"
 }
 
 resource "google_dns_record_set" "jenkins" {
