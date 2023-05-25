@@ -360,7 +360,6 @@ resource "kubernetes_manifest" "jenkinsIngress" {
 
   depends_on = [
     kubernetes_namespace.toolchainNamespace,
-    google_compute_address.jenkinsIp,
     google_dns_record_set.jenkins,
     helm_release.jenkins
   ]
