@@ -62,9 +62,6 @@ rbac:
 controller:
   tag: 2.387.3-lts-jdk11
   serviceType: NodePort
-  # installLatestPlugins: true
-  # overwritePluginsFromImage: false
-  # loadBalancerIP: ${google_compute_address.jenkinsIp.address}
   installPlugins:
     - git:5.0.0
     - configuration-as-code:1625.v27444588cc3d
@@ -333,7 +330,6 @@ resource "kubernetes_manifest" "jenkinsIngress" {
       "namespace" = "toolchain"
       "annotations" = {
         "kubernetes.io/ingress.class"= "nginx"
-        #"nginx.ingress.kubernetes.io/ingress.global-static-ip-name"= google_compute_address.jenkinsIp.name
         "nginx.ingress.kubernetes.io/rewrite-target" = "/"
 
       }
