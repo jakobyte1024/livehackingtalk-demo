@@ -41,7 +41,7 @@ data "kubernetes_path_documents" "ingress-manifests" {
   pattern = "./ingress.yaml"
 }
 
-resource "kkubernetes_manifest" "ingressNginxController" {
+resource "kubernetes_manifest" "ingressNginxController" {
   count     = length(data.kubectl_path_documents.ingress-manifests.documents)
   yaml_body = element(data.kubectl_path_documents.ingress-manifests.documents, count.index)
 }
