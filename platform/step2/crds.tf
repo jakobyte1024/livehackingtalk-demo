@@ -21,28 +21,24 @@ resource "kubernetes_namespace" "ingressNginx" {
   }
 }
 
-#resource "helm_release" "ingressNginxController" {
-#  name       = "ingress-nginx-controller"
-#  repository = "https://kubernetes.github.io/ingress-nginx/"
-#  chart      = "ingress-nginx"
-#  namespace  = "ingress-nginx"
+resource "helm_release" "ingressNginxController" {
+  name       = "ingress-nginx-controller"
+  repository = "https://kubernetes.github.io/ingress-nginx/"
+  chart      = "ingress-nginx"
+  namespace  = "ingress-nginx"
 
-#  set {
-#    name  = "ingressClassResource.default"
-#    value = "true"
-#  }
+  set {
+    name  = "ingressClassResource.default"
+    value = "true"
+  }
+  set {
+    name  = "controller.service.loadBalancerIP"
+    value = google_compute_address.ingressIp.address
+  }
 
-#  depends_on = [
-#    kubernetes_namespace.ingressNginx
-#  ]
-#}
-
-data "kubernetes_path_documents" "ingress-manifests" {
-  pattern = "./ingress.yaml"
+  depends_on = [
+    kubernetes_namespace.ingressNginx
+  ]
 }
 
-resource "kubernetes_manifest" "ingressNginxController" {
-  count     = length(data.kubectl_path_documents.ingress-manifests.documents)
-  yaml_body = element(data.kubectl_path_documents.ingress-manifests.documents, count.index)
-}
 

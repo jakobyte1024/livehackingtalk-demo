@@ -4,10 +4,8 @@ resource "kubernetes_namespace" "toolchainNamespace" {
   }
 }
 
-resource "google_compute_address" "jenkinsIp" {
-  name          = "jenkinsip${var.environment}"
-  region        = "europe-west3"
-  address_type  = "EXTERNAL"
+data "google_compute_address" "ingressIp" {
+  name          = "ingressip${var.environment}"
 }
 
 resource "google_dns_record_set" "jenkins" {
@@ -16,7 +14,7 @@ resource "google_dns_record_set" "jenkins" {
   type         = "A"
   ttl          = 10
 
-  rrdatas = [google_compute_address.jenkinsIp.address]
+  rrdatas = [google_compute_address.ingressIp.address]
 }
 
 resource "google_service_account" "jenkins" {
@@ -336,7 +334,7 @@ resource "kubernetes_manifest" "jenkinsIngress" {
       "annotations" = {
         "kubernetes.io/ingress.class"= "nginx"
         #"nginx.ingress.kubernetes.io/ingress.global-static-ip-name"= google_compute_address.jenkinsIp.name
-        #"nginx.ingress.kubernetes.io/rewrite-target" = "/"
+        "nginx.ingress.kubernetes.io/rewrite-target" = "/"
 
       }
     }
