@@ -356,7 +356,7 @@ resource "kubernetes_manifest" "jenkinsIngress" {
             "pathType" = "Prefix"
             "backend" = {
               "service" = {
-                "name" = data.kubernetes_service_v1.jenkinsService.spec0..metadata.0.name
+                "name" = data.kubernetes_service_v1.jenkinsService.spec.0.metadata.0.name
                 "port" = {
                   "number" = data.kubernetes_service_v1.jenkinsService.port
                 }
