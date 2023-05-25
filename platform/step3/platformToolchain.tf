@@ -358,7 +358,7 @@ resource "kubernetes_manifest" "jenkinsIngress" {
               "service" = {
                 "name" = data.kubernetes_service_v1.jenkinsService.metadata.0.name
                 "port" = {
-                  "number" = data.kubernetes_service_v1.jenkinsService.spec.0.port.0
+                  "number" = data.kubernetes_service_v1.jenkinsService.spec.0.port.0.port
                 }
               }
             }
