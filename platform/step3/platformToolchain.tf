@@ -62,7 +62,10 @@ rbac:
   create: true
 controller:
   tag: 2.387.3-lts-jdk11
-  serviceType: NodePort
+  serviceType: ClusterIP
+  #installLatestPlugins: true
+  #overwritePluginsFromImage: false
+  #loadBalancerIP: ${google_compute_address.jenkinsIp.address}
   installPlugins:
     - git:5.0.0
     - configuration-as-code:1625.v27444588cc3d
