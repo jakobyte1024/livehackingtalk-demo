@@ -14,7 +14,7 @@ resource "google_dns_record_set" "jenkins" {
   type         = "A"
   ttl          = 10
 
-  rrdatas = [google_compute_address.ingressIp.address]
+  rrdatas = [data.google_compute_address.ingressIp.address]
 }
 
 resource "google_service_account" "jenkins" {
@@ -62,9 +62,9 @@ rbac:
 controller:
   tag: 2.387.3-lts-jdk11
   serviceType: NodePort
-  #installLatestPlugins: true
-  #overwritePluginsFromImage: false
-  #loadBalancerIP: ${google_compute_address.jenkinsIp.address}
+  /*installLatestPlugins: true
+  overwritePluginsFromImage: false
+  loadBalancerIP: ${google_compute_address.jenkinsIp.address}*/
   installPlugins:
     - git:5.0.0
     - configuration-as-code:1625.v27444588cc3d
