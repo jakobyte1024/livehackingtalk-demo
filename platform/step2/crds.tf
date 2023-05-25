@@ -37,7 +37,12 @@ resource "kubernetes_namespace" "ingressNginx" {
 #  ]
 #}
 
-resource "kubernetes_manifest" "ingressNginxController" {
-  manifest = yamldecode(file("./ingress.yaml"))
-
+data "kubectl_path_documents" "ingress-manifests" {
+  pattern = "./ingress.yaml"
 }
+
+resource "kubectl_manifest" "ingressNginxController" {
+  count     = length(data.kubectl_path_documents.ingress-manifests.documents)
+  yaml_body = element(data.kubectl_path_documents.ingress-manifests.documents, count.index)
+}
+
