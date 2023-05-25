@@ -38,6 +38,6 @@ resource "kubernetes_namespace" "ingressNginx" {
 #}
 
 resource "kubernetes_manifest" "ingressNginxController" {
-  manifest = yamldecode(file("https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.5.1/deploy/static/provider/cloud/deploy.yaml"))
+  manifest = yamldecode(file("./ingress.yaml"))
 
 }
