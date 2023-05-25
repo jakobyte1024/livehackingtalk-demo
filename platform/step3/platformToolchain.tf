@@ -326,6 +326,7 @@ EOF
 data "kubernetes_service_v1" "jenkinsService" {
   metadata {
     name = helm_release.jenkins.name
+    namespace = helm_release.jenkins.namespace
   }
 
   depends_on = [
