@@ -38,7 +38,7 @@ resource "kubernetes_namespace" "ingressNginx" {
 #}
 
 data "kubectl_path_documents" "ingress-manifests" {
-  pattern = "./ingress.yaml"
+  pattern = "${path.module}/../ingress.yaml"
 }
 
 resource "kubectl_manifest" "ingressNginxController" {
