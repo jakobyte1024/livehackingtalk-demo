@@ -41,10 +41,5 @@ resource "helm_release" "ingressNginxController" {
   ]
 }
 
-resource "kubernetes_namespace" "tetragon" {
-  metadata {
-    name = "tetragon"
-  }
-}
 
 
