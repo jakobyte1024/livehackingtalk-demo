@@ -50,6 +50,7 @@ resource "helm_release" "jenkins" {
   repository = "https://charts.jenkins.io"
   chart      = "jenkins"
   namespace  = "toolchain"
+  version    = "4.3.26"
 
   depends_on = [
     kubernetes_namespace.toolchainNamespace
