@@ -50,7 +50,6 @@ resource "helm_release" "jenkins" {
   repository = "https://charts.jenkins.io"
   chart      = "jenkins"
   namespace  = "toolchain"
-  version    = "4.3.23"
 
   depends_on = [
     kubernetes_namespace.toolchainNamespace
@@ -64,8 +63,8 @@ rbac:
 controller:
   tag: 2.387.3-lts-jdk11
   serviceType: ClusterIP
-  #installLatestPlugins: true
-  #overwritePluginsFromImage: false
+  installLatestPlugins: false
+  overwritePluginsFromImage: true
   installPlugins:
     - git:5.0.0
     - configuration-as-code:1625.v27444588cc3d
