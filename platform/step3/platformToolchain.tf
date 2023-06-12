@@ -63,7 +63,7 @@ rbac:
 controller:
   tag: 2.387.3-lts-jdk11
   serviceType: ClusterIP
-  #installLatestPlugins: true
+  #installLatestPlugins: false
   #overwritePluginsFromImage: false
   installPlugins:
     - git:5.1.0
