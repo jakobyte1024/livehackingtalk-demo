@@ -63,12 +63,12 @@ rbac:
 controller:
   tag: 2.387.3-lts-jdk11
   serviceType: ClusterIP
-  installLatestPlugins: false
+  installLatestPlugins: true
   overwritePluginsFromImage: true
   installPlugins:
-    - git:5.0.0
-    - configuration-as-code:1625.v27444588cc3d
-    - kubernetes:3900.va_dce992317b_4
+    - git:5.1.0
+    - configuration-as-code:1647.ve39ca_b_829b_42
+    - kubernetes:3937.vd7b_82db_e347b_
     - workflow-aggregator:596.v8c21c963d92d
     - job-dsl:1.82
   sidecars:
