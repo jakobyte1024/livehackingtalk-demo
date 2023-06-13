@@ -86,4 +86,7 @@ resource "kubernetes_manifest" "tetragonPolicy" {
       }]
     }
   }
+   depends_on = [
+    helm_release.tetragon
+   ]
 }
