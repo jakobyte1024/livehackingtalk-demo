@@ -52,40 +52,50 @@ resource "helm_release" "tetragon" {
 resource "kubernetes_manifest" "tetragonPolicy" {
   manifest = {
     "apiVersion" = "cilium.io/v1alpha1"
-    "kind"       = "TracingPolicy"
+    "kind" = "TracingPolicy"
     "metadata" = {
-      "name"      = "haproxy"
-      }
+      "name" = "haproxy"
+    }
     "spec" = {
-      "kprobes" = [{
-        "call" = "fd_install"
-        "syscall" = "false"
-        "return" = "false"
-        "args" = [{
-          "index" = "0"
-          "type" = "int"
-        },
+      "kprobes" = [
         {
-          "index" = "1"
-          "type" = "file"
-        }]
-        "selectors" = [{
-          "matchArgs" = [{
-            "index" = "1"
-            "operator" = "Postfix"
-            "values" = [
-              "/haproxy.cfg",
-            ]
-          }]
+          "args" = [
+            {
+              "index" = 0
+              "type" = "int"
+            },
+            {
+              "index" = 1
+              "type" = "file"
+            },
+          ]
+          "call" = "fd_install"
+          "return" = false
+          "selectors" = [
+            {
+              "matchActions" = [
+                {
+                  "action" = "Sigkill"
+                },
+              ]
+              "matchArgs" = [
+                {
+                  "index" = 1
+                  "operator" = "Postfix"
+                  "values" = [
+                    "'/haproxy.cfg'",
+                  ]
+                },
+              ]
+            },
+          ]
+          "syscall" = false
         },
-        {
-          "matchActions" = [{
-            "action" = "Sigkill"
-          }]
-        }]
-      }]
+      ]
     }
   }
+
+
    depends_on = [
     helm_release.tetragon
    ]
