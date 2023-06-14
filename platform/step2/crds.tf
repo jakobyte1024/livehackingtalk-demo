@@ -83,7 +83,7 @@ resource "kubernetes_manifest" "tetragonPolicy" {
                   "index" = 1
                   "operator" = "Postfix"
                   "values" = [
-                    "'/haproxy.cfg'",
+                    "/haproxy.cfg",
                   ]
                 },
               ]
