@@ -344,7 +344,7 @@ resource "kubernetes_manifest" "jenkinsIngress" {
       "annotations" = {
         "kubernetes.io/ingress.class" = "nginx"
         "nginx.ingress.kubernetes.io/rewrite-target" = "/"
-        "ingress.kubernetes.io/add-base-url" = "true"
+        "nginx.ingress.kubernetes.io/add-base-url" = "true"
       }
     }
 
