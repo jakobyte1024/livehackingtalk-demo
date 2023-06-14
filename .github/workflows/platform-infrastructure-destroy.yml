@@ -31,7 +31,7 @@ jobs:
 
       - name: Terraform apply
         run: |
-          terraform destroy --auto-approve -lock=false
+          terraform destroy --auto-approve
         shell: bash
 
   step2:
