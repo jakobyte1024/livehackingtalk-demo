@@ -62,7 +62,7 @@ rbac:
   create: true
 controller:
   tag: 2.387.3-lts-jdk11
-  serviceType: LoadBalancer
+  serviceType: ClusterIP
   installLatestPlugins: false
   overwritePluginsFromImage: true
   installPlugins:
@@ -343,7 +343,6 @@ resource "kubernetes_manifest" "jenkinsIngress" {
       "namespace" = "toolchain"
       "annotations" = {
         "kubernetes.io/ingress.class" = "nginx"
-        "nginx.ingress.kubernetes.io/rewrite-target" = "/*"
       }
     }
 
