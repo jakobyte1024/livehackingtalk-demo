@@ -75,5 +75,5 @@ jobs:
       
       - name: Terraform apply
         run: |
-          terraform apply --auto-approve
+          terraform apply --auto-approve -lock=false
         shell: bash
