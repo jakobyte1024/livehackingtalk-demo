@@ -26,7 +26,6 @@ resource "helm_release" "ingressNginxController" {
   repository = "https://kubernetes.github.io/ingress-nginx/"
   chart      = "ingress-nginx"
   namespace  = "ingress-nginx"
-  version = "4.2.0"
 
   set {
     name  = "ingressClassResource.default"
