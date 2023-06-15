@@ -62,7 +62,7 @@ rbac:
   create: true
 controller:
   tag: 2.387.3-lts-jdk11
-  serviceType: ClusterIP
+  serviceType: loadBalancer
   installLatestPlugins: false
   overwritePluginsFromImage: true
   installPlugins:
