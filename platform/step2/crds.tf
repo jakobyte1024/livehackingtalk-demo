@@ -23,16 +23,16 @@ resource "kubernetes_namespace" "ingressNginx" {
 
 resource "helm_release" "ingressNginxController" {
   name       = "ingress-nginx-controller"
-  repository = "https://kubernetes.github.io/ingress-nginx/"
-  chart      = "ingress-nginx"
+  repository = "oci://registry-1.docker.io/bitnamicharts/nginx-ingress-controller"
+  chart      = "nginx-ingress-controller"
   namespace  = "ingress-nginx"
 
   set {
-    name  = "ingressClassResource.default"
-    value = "true"
+    name  = "ingressClassResource.name"
+    value = "nginx"
   }
   set {
-    name  = "controller.service.loadBalancerIP"
+    name  = "service.loadBalancerIP"
     value = google_compute_address.ingressIp.address
   }
 
