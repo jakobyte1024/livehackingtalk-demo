@@ -62,7 +62,7 @@ rbac:
   create: true
 controller:
   tag: 2.387.3-lts-jdk11
-  serviceType: loadBalancer
+  serviceType: LoadBalancer
   installLatestPlugins: false
   overwritePluginsFromImage: true
   installPlugins:
