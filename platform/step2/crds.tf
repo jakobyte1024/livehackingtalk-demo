@@ -26,6 +26,7 @@ resource "helm_release" "ingressNginxController" {
   repository = "https://charts.bitnami.com/bitnami"
   chart      = "nginx"
   namespace  = "ingress-nginx"
+  version = "15.0.2"
 
   set {
     name  = "ingressClassResource.name"
