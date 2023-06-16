@@ -341,14 +341,11 @@ resource "kubernetes_manifest" "jenkinsIngress" {
     "metadata" = {
       "name"      = "jenkins-ingress"
       "namespace" = "toolchain"
-      "annotations" = {
-        "kubernetes.io/ingress.class" = "nginx"
-        "nginx.ingress.kubernetes.io/rewrite-target" = "/"
-        "nginx.ingress.kubernetes.io/ssl-redirect" = "false"
-      }
+
     }
 
     "spec" = {
+      "ingressClassName" = "nginx"
       "rules" = [{
         "host" =  trimsuffix(google_dns_record_set.jenkins.name, ".")
         "http" = {
