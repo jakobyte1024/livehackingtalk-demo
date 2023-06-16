@@ -346,7 +346,6 @@ resource "kubernetes_manifest" "jenkinsIngress" {
         "nginx.ingress.kubernetes.io/rewrite-target" = "/"
       }
     }
-
     "spec" = {
       "rules" = [{
         "host" =  trimsuffix(google_dns_record_set.jenkins.name, ".")
