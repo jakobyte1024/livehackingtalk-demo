@@ -28,19 +28,13 @@ resource "helm_release" "ingressNginxController" {
   namespace  = "ingress-nginx"
   version = "15.0.2"
 
-  set {
-    name  = "ingressClassResource.name"
-    value = "nginx"
-  }
+
   set {
     name  = "service.loadBalancerIP"
     value = google_compute_address.ingressIp.address
   }
 
-   set {
-    name  = "containerPorts.https"
-    value = 443
-  }
+
 
 
 
