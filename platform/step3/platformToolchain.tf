@@ -341,7 +341,10 @@ resource "kubernetes_manifest" "jenkinsIngress" {
     "metadata" = {
       "name"      = "jenkins-ingress"
       "namespace" = "toolchain"
-
+      "annotations" = {
+        "kubernetes.io/ingress.class" = "nginx"
+        "nginx.ingress.kubernetes.io/rewrite-target" = "/"
+      }
     }
 
     "spec" = {
