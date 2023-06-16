@@ -345,6 +345,7 @@ resource "kubernetes_manifest" "jenkinsIngress" {
         "kubernetes.io/ingress.class" = "nginx"
         "nginx.ingress.kubernetes.io/rewrite-target" = "/"
         "nginx.ingress.kubernetes.io/ssl-redirect" = "false"
+        "nginx.ingress.kubernetes.io/ssl-passthrough" = "false"
       }
     }
 
