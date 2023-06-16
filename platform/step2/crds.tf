@@ -24,9 +24,9 @@ resource "kubernetes_namespace" "ingressNginx" {
 resource "helm_release" "ingressNginxController" {
   name       = "ingress-nginx-controller"
   repository = "https://charts.bitnami.com/bitnami"
-  chart      = "nginx-ingress-controller"
+  chart      = "nginx"
   namespace  = "ingress-nginx"
-  version = "9.7.2"
+  version = "15.0.2"
 
   set {
     name  = "ingressClassResource.name"
