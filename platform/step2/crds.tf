@@ -37,6 +37,13 @@ resource "helm_release" "ingressNginxController" {
     value = google_compute_address.ingressIp.address
   }
 
+   set {
+    name  = "containerPorts.https"
+    value = 443
+  }
+
+
+
   depends_on = [
     kubernetes_namespace.ingressNginx
   ]
