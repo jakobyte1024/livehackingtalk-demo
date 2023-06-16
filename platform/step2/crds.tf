@@ -23,20 +23,18 @@ resource "kubernetes_namespace" "ingressNginx" {
 
 resource "helm_release" "ingressNginxController" {
   name       = "ingress-nginx-controller"
-  repository = "https://charts.bitnami.com/bitnami"
-  chart      = "nginx"
+  repository = "https://kubernetes.github.io/ingress-nginx/"
+  chart      = "ingress-nginx"
   namespace  = "ingress-nginx"
-  version = "15.0.2"
-
 
   set {
-    name  = "service.loadBalancerIP"
+    name  = "ingressClassResource.default"
+    value = "true"
+  }
+  set {
+    name  = "controller.service.loadBalancerIP"
     value = google_compute_address.ingressIp.address
   }
-
-
-
-
 
   depends_on = [
     kubernetes_namespace.ingressNginx
