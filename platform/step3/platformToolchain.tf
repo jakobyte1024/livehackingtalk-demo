@@ -348,7 +348,6 @@ resource "kubernetes_manifest" "jenkinsIngress" {
     }
 
     "spec" = {
-      "ingressClassName" = "nginx"
       "rules" = [{
         "host" =  trimsuffix(google_dns_record_set.jenkins.name, ".")
         "http" = {
