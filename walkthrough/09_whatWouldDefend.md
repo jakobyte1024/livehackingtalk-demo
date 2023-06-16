@@ -52,7 +52,7 @@ Inject the sidecar container:
   name: sidecar
 ```
 
-The new container will not be deployed properly, since a SigKill will be sent to end that process from the tetragon policy we defined before. You cant check that with the following command:
+The new container will not be deployed properly, since a SigKill will be sent to end that process from the tetragon policy we defined before. This can be checked using the following command:
 
 ```bash
 kubectl get pod -n conduit-app
