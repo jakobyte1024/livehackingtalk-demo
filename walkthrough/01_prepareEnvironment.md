@@ -13,6 +13,8 @@ Valid names are for example:
 * staging
 * preprod
 
+You should instantiate `test` and `prod` for the live demo.
+
 ## Prepare GCP
 
 Terraform Service Account needs many permissions:
@@ -61,7 +63,11 @@ Usernamelist generator is used during walkthrough.
 ```bash
 cd /root/demotalk
 git clone https://github.com/captain-noob/username-list-generator.git
+
+rm /root/demotalk/username-list-generator/user.txt
+rm /root/demotalk/username-list-generator/output.txt user.txt
 ```
+and create the namelist beforhand, describe here [Jenkins BruteForce](./04_jenkinsBruteforce.md)
 
 ### prepare wordlists
 Rockyou-list and top1million wordlist are used and must be prepared.
@@ -79,11 +85,13 @@ wget -O /usr/share/wordlists/subdomains-top1million-5000.txt https://raw.githubu
 To gain cloud access, GCP SDK is needed.
 
 ```bash
-echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
+apt-get install apt-transport-https ca-certificates gnupg
 
-curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo tee /usr/share/keyrings/cloud.google.gpg
+echo "deb https://packages.cloud.google.com/apt cloud-sdk main" | tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
 
-apt-get update && apt-get install google-cloud-cli google-cloud-sdk-gke-gcloud-auth-plugin
+curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -
+
+apt-get update && apt-get install -y google-cloud-cli google-cloud-sdk-gke-gcloud-auth-plugin
 ```
 
 ### Install Kubernetes Tools
@@ -98,7 +106,7 @@ Octant will be used to show details of the running architecture.
 ```bash
 wget https://github.com/vmware-archive/octant/releases/download/v0.25.1/octant_0.25.1_Linux-64bit.deb
 
-sudo dpkg -i octant_0.25.1_Linux-64bit.deb
+dpkg -i octant_0.25.1_Linux-64bit.deb
 ```
 
 ## cleanup
