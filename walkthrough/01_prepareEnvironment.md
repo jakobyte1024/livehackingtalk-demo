@@ -88,7 +88,7 @@ wget -O /usr/share/wordlists/subdomains-top1million-5000.txt https://raw.githubu
 To gain cloud access, GCP SDK is needed.
 
 ```bash
-apt-get install apt-transport-https ca-certificates gnupg
+apt-get update && apt-get install -y apt-transport-https ca-certificates gnupg
 
 echo "deb https://packages.cloud.google.com/apt cloud-sdk main" | tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
 
