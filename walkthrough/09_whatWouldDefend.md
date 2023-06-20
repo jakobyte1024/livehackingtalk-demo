@@ -34,6 +34,7 @@ kubectl edit deployment/conduit-backend
 
 
 Inject the sidecar container, directly below `containers` on column 0
+Also see [snippet](./snippets/sidecar.yaml) for live demo
 
 ```bash..
       - env:

@@ -4,6 +4,9 @@ This document covers some manual steps that are needed to use this walkthrough.
 ## Backlog
 * Access Logs must be showed in it's Container Logs.
 * Jenkins_Enum login guesses too slow
+* Ingress Setup or PluginsUpdate caused that CRON builds arent recognized anymore
+* change CRON times to 17, 19, and more variances
+* Jenkins UI no Auto Update (for jobs CRON running) (at least in Chrome) anymore. Related to ingress ? Or are the jobs too fast - taking ms only. Related to plugin updates?
 
 ## Valid environment names
 Environments can be created via GitHub Actions pipeline or each step's [runLocally.sh](../platform/step1/runLocally.sh)
