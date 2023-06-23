@@ -17,8 +17,6 @@ variable "environment" {
 
 variable "createPolicy" {
     # will be provided as environment variable.
-    type = bool
-    default = false
 }
 
 provider "kubernetes" {

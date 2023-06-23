@@ -7,9 +7,15 @@ on:
         description: 'Target environment'
         required: true
         default: "test"
+      createPolicy:
+        description: 'Create tetragon policy'
+        required: true
+        type: bool
+        default: "false"
 
 env:
   TF_VAR_environment: '${{ github.event.inputs.environment }}'
+  TF_VAR_createPolicy: '${{ github.event.inputs.createPolicy }}'
   GOOGLE_CREDENTIALS: ${{ secrets.GCPCRED }}
 
 jobs:
