@@ -41,4 +41,10 @@ resource "helm_release" "ingressNginxController" {
   ]
 }
 
+resource "helm_release" "tetragon" {
+  name       = "tetragon"
+  repository = "https://helm.cilium.io"
+  chart      = "tetragon"
+  namespace  = "kube-system"
+}
 

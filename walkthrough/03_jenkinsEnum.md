@@ -11,13 +11,13 @@ msfconsole
 
 use auxiliary/scanner/http/jenkins_enum
 set RHOSTS jenkins.test.nevervictimconsult.xyz
-set RPORT 8080
+set RPORT 80
 set TARGETURI /
 exploit
 ```
 We detect that theres a pretty modern version of Jenkins running.
 ```bash
-[+] 34.159.77.191:8080    - Jenkins Version 2.387.3
+[+] 34.159.77.191:80    - Jenkins Version 2.387.3
 [*] /script restricted (403)
 [*] /view/All/newJob restricted (403)
 [*] /asynchPeople/ restricted (403)

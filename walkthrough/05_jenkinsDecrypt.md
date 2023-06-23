@@ -9,7 +9,7 @@ Lets decrypt them
 ### Get the secret
 Open 
 ```
-http://jenkins.test.nevervictimconsult.xyz:8080/script
+http://jenkins.test.nevervictimconsult.xyz/script
 ```
 and start following script
 ```java

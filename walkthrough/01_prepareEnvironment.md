@@ -4,6 +4,9 @@ This document covers some manual steps that are needed to use this walkthrough.
 ## Backlog
 * Access Logs must be showed in it's Container Logs.
 * Jenkins_Enum login guesses too slow
+* Ingress Setup or PluginsUpdate caused that CRON builds arent recognized anymore
+* change CRON times to 17, 19, and more variances
+* Jenkins UI no Auto Update (for jobs CRON running) (at least in Chrome) anymore. Related to ingress ? Or are the jobs too fast - taking ms only. Related to plugin updates?
 
 ## Valid environment names
 Environments can be created via GitHub Actions pipeline or each step's [runLocally.sh](../platform/step1/runLocally.sh)
@@ -12,6 +15,8 @@ Valid names are for example:
 * test
 * staging
 * preprod
+
+You should instantiate `test` and `prod` for the live demo.
 
 ## Prepare GCP
 
@@ -61,7 +66,11 @@ Usernamelist generator is used during walkthrough.
 ```bash
 cd /root/demotalk
 git clone https://github.com/captain-noob/username-list-generator.git
+
+rm /root/demotalk/username-list-generator/user.txt
+rm /root/demotalk/username-list-generator/output.txt user.txt
 ```
+and create the namelist beforhand, describe here [Jenkins BruteForce](./04_jenkinsBruteforce.md)
 
 ### prepare wordlists
 Rockyou-list and top1million wordlist are used and must be prepared.
@@ -79,11 +88,13 @@ wget -O /usr/share/wordlists/subdomains-top1million-5000.txt https://raw.githubu
 To gain cloud access, GCP SDK is needed.
 
 ```bash
-echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
+apt-get update && apt-get install -y apt-transport-https ca-certificates gnupg
 
-curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo tee /usr/share/keyrings/cloud.google.gpg
+echo "deb https://packages.cloud.google.com/apt cloud-sdk main" | tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
 
-apt-get update && apt-get install google-cloud-cli google-cloud-sdk-gke-gcloud-auth-plugin
+curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -
+
+apt-get update && apt-get install -y google-cloud-cli google-cloud-sdk-gke-gcloud-auth-plugin
 ```
 
 ### Install Kubernetes Tools
@@ -98,7 +109,7 @@ Octant will be used to show details of the running architecture.
 ```bash
 wget https://github.com/vmware-archive/octant/releases/download/v0.25.1/octant_0.25.1_Linux-64bit.deb
 
-sudo dpkg -i octant_0.25.1_Linux-64bit.deb
+dpkg -i octant_0.25.1_Linux-64bit.deb
 ```
 
 ## cleanup
