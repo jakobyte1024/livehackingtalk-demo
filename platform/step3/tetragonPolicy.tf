@@ -1,5 +1,6 @@
 
 resource "kubernetes_manifest" "tetragonPolicy" {
+  count = var.createPolicy ? 1 : 0
   manifest = {
     "apiVersion" = "cilium.io/v1alpha1"
     "kind" = "TracingPolicy"

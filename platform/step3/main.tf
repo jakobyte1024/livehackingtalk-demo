@@ -15,6 +15,12 @@ variable "environment" {
     # will be provided as environment variable.
 }
 
+variable "createPolicy" {
+    # will be provided as environment variable.
+    type = bool
+    default = false
+}
+
 provider "kubernetes" {
   host                     = "https://${data.google_container_cluster.primary.endpoint}"
   client_certificate       = base64decode(data.google_container_cluster.primary.master_auth.0.client_certificate)
