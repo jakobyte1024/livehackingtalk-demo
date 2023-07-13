@@ -7,11 +7,6 @@ on:
         description: 'Target environment'
         required: true
         default: "test"
-      createPolicy:
-        description: 'Create tetragon policy'
-        required: true
-        type: bool
-        default: "false"
 
 env:
   TF_VAR_environment: '${{ github.event.inputs.environment }}'
