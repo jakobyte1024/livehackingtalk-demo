@@ -8,10 +8,9 @@ on:
         required: true
         default: "test"
       createPolicy:
-        description: 'Create tetragon policy'
+        description: 'Create tetragon policy (0||1)'
         required: true
-        type: bool
-        default: "false"
+        default: "0"
 
 env:
   TF_VAR_environment: '${{ github.event.inputs.environment }}'
