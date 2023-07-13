@@ -15,7 +15,7 @@ on:
 
 env:
   TF_VAR_environment: '${{ github.event.inputs.environment }}'
-  TF_VAR_createPolicy: '${{ github.event.inputs.createPolicy }}'
+  TF_VAR_createPolicy: '0'
   GOOGLE_CREDENTIALS: ${{ secrets.GCPCRED }}
 
 jobs:
