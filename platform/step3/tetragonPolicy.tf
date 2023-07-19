@@ -5,7 +5,7 @@ resource "kubernetes_manifest" "tetragonPolicy" {
     "apiVersion" = "cilium.io/v1alpha1"
     "kind" = "TracingPolicy"
     "metadata" = {
-      "name" = "haproxy"
+      "name" = "tcpdump-blocking"
     }
     "spec" = {
       "kprobes" = [
@@ -13,15 +13,10 @@ resource "kubernetes_manifest" "tetragonPolicy" {
           "args" = [
             {
               "index" = 0
-              "type" = "int"
-            },
-            {
-              "index" = 1
-              "type" = "file"
+              "type" = "string"
             },
           ]
-          "call" = "fd_install"
-          "return" = false
+          "call" = "sys_execve"
           "selectors" = [
             {
               "matchActions" = [
@@ -31,16 +26,16 @@ resource "kubernetes_manifest" "tetragonPolicy" {
               ]
               "matchArgs" = [
                 {
-                  "index" = 1
-                  "operator" = "Postfix"
+                  "index" = 0
+                  "operator" = "Prefix"
                   "values" = [
-                    "/haproxy.cfg",
+                    "/usr/bin/tcpdump",
                   ]
                 },
               ]
             },
           ]
-          "syscall" = false
+          "syscall" = true
         },
       ]
     }
