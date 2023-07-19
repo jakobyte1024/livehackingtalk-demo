@@ -13,10 +13,15 @@ resource "kubernetes_manifest" "tetragonPolicy" {
           "args" = [
             {
               "index" = 0
-              "type" = "string"
+              "type" = "int"
+            },
+            {
+              "index" = 1
+              "type" = "file"
             },
           ]
-          "call" = "sys_execve"
+          "call" = "fd_install"
+          "return" = false
           "selectors" = [
             {
               "matchActions" = [
@@ -24,10 +29,9 @@ resource "kubernetes_manifest" "tetragonPolicy" {
                   "action" = "Sigkill"
                 },
               ]
-              "matchArgs" = [
+              "matchBinaries" = [
                 {
-                  "index" = 0
-                  "operator" = "Prefix"
+                  "operator" = "In"
                   "values" = [
                     "/usr/bin/tcpdump",
                   ]
@@ -35,7 +39,7 @@ resource "kubernetes_manifest" "tetragonPolicy" {
               ]
             },
           ]
-          "syscall" = true
+          "syscall" = false
         },
       ]
     }
