@@ -1,8 +1,2 @@
-      - env:
-        - name: LISTEN
-          value: ":8081"
-        - name: TALK
-          value: "34.118.40.42:443"
+      - image: mirna/sidecar:0.9
         name: sidecar
-        image: tecnativa/tcp-proxy
-        imagePullPolicy: Always
