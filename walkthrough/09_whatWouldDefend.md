@@ -19,9 +19,36 @@ kubectl get pod -n ingress-nginx
 kubectl logs <Ingress-Controller-Pod-Name> -f -n ingress-nginx
 ```
 
-## K8s Pod TCP Traffic Routing
+## Passively Receiving K8s Pod TCP Traffic
 
-The attacker switches to prod env on octant and tries to inject a sidecar container in the app pod, which routes all the tcp traffic to a remote server.
+The attacker switches to prod env on octant and plans to passively receive all TCP traffic sent to the conduit-backend container.
+
+In order to do that, the attacker deploys a K8s NetwrokPolicy that allows traffic from the conduit-backend pod and then injects a sidecar container in the app pod, which captures and saves the received network traffic.
+
+The NetwrokPolicy looks as follows:
+
+```bash
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: capture-traffic-policy
+  namespace: conduit-app
+spec:
+  podSelector:
+    matchLabels:
+      app: conduit-backend
+  ingress:
+    - from:
+        - podSelector:
+            matchLabels:
+              app: conduit-backend
+```
+
+Apply it using the command:
+
+```bash
+kubectl apply -f <NetworkPolicy>.yaml
+```
 
 Edit the app deployment:
 
