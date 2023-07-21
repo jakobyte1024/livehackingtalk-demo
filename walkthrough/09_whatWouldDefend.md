@@ -23,7 +23,7 @@ kubectl logs <Ingress-Controller-Pod-Name> -f -n ingress-nginx
 
 The attacker switches to prod env on octant and plans to passively receive all TCP traffic sent to the conduit-backend container.
 
-In order to do that, the attacker tries to inject a sidecar container in the app pod, which captures all TCP traffic passing through the loopback interface and saves the received network traffic into a file.
+In order to do that, the attacker tries to inject a sidecar container in the app pod, which captures all TCP traffic passing through the pod's network interface and saves the received network traffic into a file.
 
 Edit the app deployment:
 
