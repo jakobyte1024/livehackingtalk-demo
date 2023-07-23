@@ -4,13 +4,18 @@ on:
   workflow_dispatch:
     inputs:
       environment:
-        description: 'Target environment'
+        description: "Target environment"
         required: true
         default: "test"
+      createPolicy:
+        description: "Create tetragon policy"
+        required: true
+        type: bool
+        default: "false"
 
 env:
-  TF_VAR_environment: '${{ github.event.inputs.environment }}'
-  TF_VAR_createPolicy: '0'
+  TF_VAR_environment: "${{ github.event.inputs.environment }}"
+  TF_VAR_createPolicy: "0"
   GOOGLE_CREDENTIALS: ${{ secrets.GCPCRED }}
 
 jobs:

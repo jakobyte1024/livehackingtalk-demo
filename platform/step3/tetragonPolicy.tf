@@ -5,7 +5,7 @@ resource "kubernetes_manifest" "tetragonPolicy" {
     "apiVersion" = "cilium.io/v1alpha1"
     "kind" = "TracingPolicy"
     "metadata" = {
-      "name" = "haproxy"
+      "name" = "tcpdump-blocking"
     }
     "spec" = {
       "kprobes" = [
@@ -29,12 +29,11 @@ resource "kubernetes_manifest" "tetragonPolicy" {
                   "action" = "Sigkill"
                 },
               ]
-              "matchArgs" = [
+              "matchBinaries" = [
                 {
-                  "index" = 1
-                  "operator" = "Postfix"
+                  "operator" = "In"
                   "values" = [
-                    "/haproxy.cfg",
+                    "/usr/bin/tcpdump",
                   ]
                 },
               ]
