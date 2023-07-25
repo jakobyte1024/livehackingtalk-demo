@@ -61,7 +61,7 @@ conduit-backend-fdc76f894-596d6            1/2     Error              4 (51s ago
 We get info about those trials to inject the sidecar and the SigKill action in the tetragon logs as follows:
 
 ```bash
-kubectl logs -n kube-system ds/tetragon -c export-stdout -f | tetra getevents -o compact
+kubectl logs -n kube-system -l app.kubernetes.io/name=tetragon -c export-stdout -f | tetra getevents -o compact
 ```
 
 You will see something like this in the logs:

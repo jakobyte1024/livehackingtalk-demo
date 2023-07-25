@@ -20,18 +20,19 @@
     * Kubernetes Lookaround
 
 * Talking (Mirna)
-  * Thorsten connects Mirna's notebook 
+  * Thorsten connects Mirna's notebook
   * Recap slide
   * Tetragon slide
 
 * Live (Both)
   * On PROD stage
     * Mirna says, that Thorsten is going to start a attack on PROD
-    * Thorsten starts Jenkins BruteForce  
-    * Mirna shows the access logs, is aware of ongoing attack
+    * Mirna starts showing the access logs
+    * Thorsten starts Jenkins BruteForce
+    * Mirna is aware of ongoing attack
+    * Mirna starts showing the conduit pods logs and tetragon logs (In splitted terminal panes)
     * Thorsten places tcpdump-sidecar
-    * Mirna observes failing container start (k9s or kubectl)
-    * Mirna shows Tetragon logs
+    * Mirna gets failing container in one pane and Sigkill in the other
 
 * Talking (Mirna)
   * Defend Recap
