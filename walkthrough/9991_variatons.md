@@ -18,7 +18,6 @@
     * Jenkins Decrypt
     * Cloud Access
     * Kubernetes Lookaround
-    * Database Bucket Download
 
 * Talking (Mirna)
   * Thorsten connects Mirna's notebook 
