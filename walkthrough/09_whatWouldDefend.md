@@ -28,7 +28,7 @@ In order to do that, the attacker tries to inject a sidecar container in the app
 Edit the app deployment:
 
 ```bash
-kubectl edit deployment/conduit-backend
+kubectl edit deployment/conduit-backend -n conduit-app
 ```
 
 Inject the sidecar container, directly below `containers` on column 0
