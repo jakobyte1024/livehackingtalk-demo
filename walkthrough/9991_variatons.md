@@ -1,9 +1,4 @@
 # Variatons for different lengths
-
-## 55min
-
-## 45min
-
 ## 30min
 
 * Talking (Mirna)
