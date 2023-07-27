@@ -18,6 +18,7 @@
     * Jenkins Decrypt
     * Cloud Access
     * Kubernetes Lookaround
+    * Thorsten says that he is going to place a traffic exfiltration tool
 
 * Talking (Mirna)
   * Thorsten connects Mirna's notebook
