@@ -39,6 +39,9 @@ println( hudson.util.Secret.decrypt("${ENCRYPTED_PASSPHRASE_OR_PASSWORD}") )
 ```
 
 ```bash
+gcloud auth activate-service-account --key-file=gcpSa.json
+gcloud init --console-only
+[...]
 gcloud container clusters get-credentials --region=europe-west3 conduit-k8s-test
 [...]
 gcloud storage cp -r gs://conduit-database-backup-prod/ .
