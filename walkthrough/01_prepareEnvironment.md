@@ -131,6 +131,14 @@ wget https://github.com/vmware-archive/octant/releases/download/v0.25.1/octant_0
 dpkg -i octant_0.25.1_Linux-64bit.deb
 ```
 
+### Install Tetra CLI
+To show tetragon's logs, tetra-cli is needed
+```bash
+cd /tmp
+curl -L https://github.com/cilium/tetragon/releases/latest/download/tetra-linux-amd64.tar.gz | tar -xz
+sudo mv tetra /usr/local/bin
+```
+
 ## cleanup
 
 ```bash
