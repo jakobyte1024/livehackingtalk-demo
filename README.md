@@ -6,4 +6,4 @@
 * compromise IaC pipeline
 * steal SSO
 * Log4Shell vulnerability
-  
+* Ransomware
