@@ -19,6 +19,7 @@ resource "google_container_cluster" "primary" {
   initial_node_count        = 1
   network                   = google_compute_network.vpc_network.self_link
   enable_legacy_abac        = true
+  deletion_protection       = false
   master_auth {
     client_certificate_config {
         issue_client_certificate = true
