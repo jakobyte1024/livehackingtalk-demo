@@ -3,7 +3,7 @@ resource "google_compute_network" "vpc_network" {
 }
 
 resource "google_compute_instance_from_machine_image" "participantVm" {
-#  provider = google-beta
+  provider = google-beta
   name     = "${var.labName}-participant-0"
   zone     = "europe-west3-c"
 

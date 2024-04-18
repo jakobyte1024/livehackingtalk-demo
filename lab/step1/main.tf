@@ -4,6 +4,12 @@ provider "google" {
   zone        = "europe-west3"
 }
 
+provider "google-beta" {
+  project     = "thorsten-jakoby-tj-projekt"
+  region      = "europe-west3-c"
+  zone        = "europe-west3"
+}
+
 terraform {
   backend "gcs" {
     bucket  = "conduit-iac-prod"
