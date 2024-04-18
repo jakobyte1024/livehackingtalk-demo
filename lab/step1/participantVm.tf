@@ -11,9 +11,8 @@ resource "google_compute_instance_from_machine_image" "participantVm" {
 
   // Override fields from machine image
   network_interface {
-    network = "${var.labName}-vpc"
+    network = google_compute_network.vpc_network.self_link
     network_ip = ""
-
   }
 
 }
