@@ -16,4 +16,3 @@ resource "google_compute_instance_from_machine_image" "participantVm" {
     network_ip = ""
   }
 }
-
