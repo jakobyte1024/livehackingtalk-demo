@@ -1,4 +1,4 @@
-name: Lab Infrastructure
+name: Lab Infrastructure Destroy
 
 on:
   workflow_dispatch:
