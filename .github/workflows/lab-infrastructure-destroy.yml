@@ -1,0 +1,40 @@
+name: Lab Infrastructure
+
+on:
+  workflow_dispatch:
+    inputs:
+      labName:
+        description: "Lab name"
+        required: true
+        default: "devlab"
+      participantCount:
+        description: "Participant count"
+        required: true
+        default: "1"
+
+env:
+  TF_VAR_participantCount: "${{ github.event.inputs.participantCount }}"
+  TF_VAR_labName: "${{ github.event.inputs.labName }}"
+  GOOGLE_CREDENTIALS: ${{ secrets.GCPCRED }}
+
+jobs:
+  step1:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: lab/step1
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Terraform init
+        run: |
+          terraform init \
+            -backend-config="prefix=$TF_VAR_labName/step1-terraform/state"
+        shell: bash
+
+      - name: Terraform apply
+        run: |
+          terraform destroy --auto-approve
+        shell: bash
