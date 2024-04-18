@@ -4,8 +4,9 @@ resource "google_compute_network" "vpc_network" {
 
 resource "google_compute_instance_from_machine_image" "participantVm" {
   provider = google-beta
-  name     = "${var.labName}-participant-0"
+  name     = "${var.labName}-participant-${count.index}"
   zone     = "europe-west3-c"
+  count    = var.participantCount
 
   source_machine_image = "projects/thorsten-jakoby-tj-projekt/global/machineImages/lhca-attackvm-base-1"
 
@@ -14,5 +15,4 @@ resource "google_compute_instance_from_machine_image" "participantVm" {
     network = google_compute_network.vpc_network.self_link
     network_ip = ""
   }
-
 }

@@ -20,3 +20,7 @@ terraform {
 variable "labName" {
     # will be provided as environment variable.
 }
+
+variable "participantCount" {
+    # will be provided as environment variable.
+}
