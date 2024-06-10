@@ -14,6 +14,8 @@ resource "google_compute_firewall" "labfirewall" {
     protocol = "tcp"
     ports    = ["22", "443", "3389"]
   }
+
+  source_tags = ["web"]
 }
 
 resource "google_compute_instance_from_machine_image" "participantVm" {
