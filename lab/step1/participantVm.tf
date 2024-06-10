@@ -14,5 +14,7 @@ resource "google_compute_instance_from_machine_image" "participantVm" {
   network_interface {
     network = google_compute_network.vpc_network.self_link
     network_ip = ""
+
+    access_config {}
   }
 }
