@@ -2,6 +2,20 @@ resource "google_compute_network" "vpc_network" {
   name = "${var.labName}-vpc"
 }
 
+resource "google_compute_firewall" "labfirewall" {
+  name    = "${var.labName}-vpc-firewall"
+  network = google_compute_network.vpc_network.name
+
+  allow {
+    protocol = "icmp"
+  }
+
+  allow {
+    protocol = "tcp"
+    ports    = ["22", "443", "3389"]
+  }
+}
+
 resource "google_compute_instance_from_machine_image" "participantVm" {
   provider = google-beta
   name     = "${var.labName}-participant-${count.index}"
