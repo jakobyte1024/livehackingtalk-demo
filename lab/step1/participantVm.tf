@@ -24,7 +24,7 @@ resource "google_compute_instance_from_machine_image" "participantVm" {
   zone     = "europe-west3-c"
   count    = var.participantCount
 
-  source_machine_image = "projects/thorsten-jakoby-tj-projekt/global/machineImages/lhca-attackvm-base-1"
+  source_machine_image = "projects/thorsten-jakoby-tj-projekt/global/machineImages/lhca-attackvm-base-20240610-2100"
 
   // Override fields from machine image
   network_interface {
