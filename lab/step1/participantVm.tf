@@ -15,7 +15,7 @@ resource "google_compute_firewall" "labfirewall" {
     ports    = ["22", "443", "3389"]
   }
 
-  source_tags = ["web"]
+  source_ranges = ["0.0.0.0/0"]
 }
 
 resource "google_compute_instance_from_machine_image" "participantVm" {
