@@ -25,6 +25,9 @@ resource "google_container_cluster" "primary" {
         issue_client_certificate = true
         }
     }
+    release_channel {
+      channel = "STABLE"
+    }
 }
 
 resource "google_container_node_pool" "primary_nodes" {
